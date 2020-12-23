@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  url: 'https://smartkaleaenergia.com/es',
+  urlInformes: 'https://gesletter.es:7388/api/v1'
 };
 
 /*

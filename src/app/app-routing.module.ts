@@ -7,7 +7,7 @@ import { PagesModule } from './pages/pages.module';
 
 //Componentes
 import { AppComponent } from './app.component';
-import { LoginComponent } from 'src3/app/login/login.component';
+import { LoginComponent } from 'src/app/login/login.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 
 const appRoutes: Routes = [
