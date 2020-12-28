@@ -110,7 +110,7 @@ $(function () {
     gauge.maxValue = 3000; // set max gauge value
     gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
     gauge.animationSpeed = 45; // set animation speed (32 is default value)
-    gauge.set(2850); // set actual value   
+    gauge.set(2050); // set actual value   
 
     // ============================================================== 
     // sparkline charts

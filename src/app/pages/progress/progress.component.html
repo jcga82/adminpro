@@ -1,3 +1,500 @@
-<p>
-  progress works!
-</p>
+
+<h3>DATOS BÁSICOS</h3>
+<!-- <div class="row">
+  <div class="col-lg-3" *ngFor="let data of dataBasico">
+    <div class="card">
+          <div class="card-body">
+              <div class="d-flex">
+                  <div class="m-r-20 align-self-center"><img src="../assets/images/icon/{{ data.icon }}.png" /></div>
+                  <div class="align-self-center">
+                    <h6 class="text-muted m-t-10 m-b-0">{{ data.name }}</h6>
+                    <h2 class="m-t-0">{{ data.quantity }}</h2>
+                </div>
+              </div>
+          </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row">
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row p-t-10 p-b-10">
+                
+                    <div class="col p-r-0">
+                        <h1 class="font-light">86</h1>
+                        <h6 class="text-muted">Usuarios</h6></div>
+                
+                    <div class="col text-right align-self-center">
+                        <div data-label="90%" class="css-bar m-b-0 css-bar-primary css-bar-80"><i class="mdi mdi-account-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row p-t-10 p-b-10">
+                
+                    <div class="col p-r-0">
+                        <h1 class="font-light">66</h1>
+                        <h6 class="text-muted">Comercios</h6></div>
+                
+                    <div class="col text-right align-self-center">
+                        <div data-label="80%" class="css-bar m-b-0 css-bar-danger css-bar-90"><i class="mdi mdi-briefcase-check"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row p-t-10 p-b-10">
+                
+                    <div class="col p-r-0">
+                        <h1 class="font-light">27</h1>
+                        <h6 class="text-muted">Agrupada</h6></div>
+                
+                    <div class="col text-right align-self-center">
+                        <div data-label="100%" class="css-bar m-b-0 css-bar-warning css-bar-100"><i class="mdi mdi-star-circle"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <div class="row p-t-10 p-b-10">
+                
+                    <div class="col p-r-0">
+                        <h1 class="font-light">66</h1>
+                        <h6 class="text-muted">Iberdrola</h6></div>
+                
+                    <div class="col text-right align-self-center">
+                        <div data-label="75%" class="css-bar m-b-0 css-bar-info css-bar-95"><i class="mdi mdi-receipt"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Módulo Tiempo</h4>
+                <div class="d-flex align-items-center flex-row m-t-30">
+                    <div class="p-2 display-5 text-info"><i class="wi wi-day-showers"></i> <span>13<sup>°</sup></span></div>
+                    <div class="p-2">
+                        <h3 class="m-b-0">Enero</h3><small>Donostia San Sebastián</small></div>
+                </div>
+                <table class="table no-border">
+                    <tbody>
+                        <tr>
+                            <td>Humedad</td>
+                            <td class="font-medium">83%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 col-md-6">
+        <app-donuts titulo="Barrios del proyecto" [labelDonuts]="labelsDonuts" [dataDonuts]="dataDonuts"></app-donuts>
+      </div> 
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Novedades</h4>
+                <ul class="feeds">
+                    <li>
+                        <div class="bg-light-info"><i class="fa fa-bell-o"></i></div> You have 4 pending tasks. <span class="text-muted">Just Now</span></li>
+                    <li>
+                        <div class="bg-light-success"><i class="ti-server"></i></div> Server #1 overloaded.<span class="text-muted">2 Hours ago</span></li>
+                    <li>
+                        <div class="bg-light-warning"><i class="ti-shopping-cart"></i></div> New order received.<span class="text-muted">31 May</span></li>
+                    <li>
+                        <div class="bg-light-danger"><i class="ti-user"></i></div> New user registered.<span class="text-muted">30 May</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>ASESORÍAS ENERGÉTICAS</h3>
+
+<div class="row">
+  <div class="col-lg-4 col-md-4">
+      <div class="card bg-primary">
+          <div class="card-body">
+              <div class="d-flex">
+                  <div class="m-r-20 align-self-center">
+                      <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
+                  <div>
+                      <h3 class="card-title text-white">Asesorías</h3>
+                      <h6 class="card-subtitle text-white">Datos básicos</h6> </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-4 col-md-4">
+      <div class="card bg-danger">
+          <div class="card-body">
+              <div class="d-flex">
+                  <div class="m-r-20 align-self-center">
+                      <h1 class="text-white"><i class="icon-cloud-download"></i></h1></div>
+                  <div>
+                      <h3 class="card-title text-white">Descarga asesorías</h3>
+                      <h6 class="card-subtitle text-white">Noviembre  2020</h6> </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="col-lg-4 col-md-4">
+    <div class="card bg-secondary">
+        <div class="card-body">
+            <div class="d-flex">
+                <div class="m-r-20 align-self-center">
+                    <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
+                <div>
+                    <h3 class="card-title text-white">Último Seguimiento</h3>
+                    <h6 class="card-subtitle text-white">Abril  2020</h6> </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<h3>CALIDAD DEL DATO</h3>
+
+<div class="row">
+
+  <div class="col-lg-9">
+    <app-grafico-area titulo="Calidad por mes" label="Mes" [data]="dataArea"></app-grafico-area>
+  </div>
+
+  <div class="col-lg-3">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title"><span class="lstick"></span>Dato Global</h4>
+                <ngx-gauge 
+                    [value]="gaugeValue" 
+                    [label]="gaugeLabel"  
+                    [append]="gaugeAppendText"
+                    [thick]=18
+                    [thresholds]="thresholdConfig"
+                    >
+            </ngx-gauge>
+        </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="col-lg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="text-center">Parte Vieja</h4>
+              <div class="gaugejs-box">
+                  <canvas id="foo" class="gaugejs">guage</canvas>
+              </div>
+          </div>
+          <div class="box b-t text-center">
+              <h4 class="font-medium m-b-0">68%</h4></div>
+      </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="text-center">Altza</h4>
+              <div class="gaugejs-box">
+                  <canvas id="foo2" class="gaugejs">guage</canvas>
+              </div>
+          </div>
+          <div class="box b-t text-center">
+              <h4 class="font-medium m-b-0">25%</h4></div>
+      </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="text-center">Sancho El Sabio</h4>
+              <div class="gaugejs-box">
+                  <canvas id="foo3" class="gaugejs">guage</canvas>
+              </div>
+          </div>
+          <div class="box b-t text-center">
+              <h4 class="font-medium m-b-0">45%</h4></div>
+      </div>
+  </div>
+  <div class="col-lg-3 col-md-6">
+      <div class="card">
+          <div class="card-body">
+              <h4 class="text-center">Otros</h4>
+              <div class="gaugejs-box">
+                  <canvas id="foo4" class="gaugejs">guage</canvas>
+              </div>
+          </div>
+          <div class="box b-t text-center">
+              <h4 class="font-medium m-b-0">70%</h4></div>
+      </div>
+  </div>
+</div>
+
+<h3>COMPRA AGRUPADA DE ENERGÍA</h3>
+
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card bg-primary">
+            <div class="card-body">
+                <h4 class="card-title text-white">Precios agrupada</h4>
+                <table class="table no-border">
+                    <tbody class="text-white">
+                        <tr>
+                            <td>2.0A</td>
+                            <td class="font-medium">0.1148 €/kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2.0 DHA</td>
+                            <td class="font-medium">0.14 - 0,07 €/kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2.1A</td>
+                            <td class="font-medium">0.1423 €/kWh</td>
+                        </tr>
+                        <tr>
+                            <td>2.1 DHA</td>
+                            <td class="font-medium">0.156 - 0,086 €/kWh</td>
+                        </tr>
+                        <tr>
+                            <td>3.0A</td>
+                            <td class="font-medium">0.0638 €/kWh</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card earning-widget">
+            <div class="card-body">
+                <div class="card-title">
+                    <select class="custom-select pull-right">
+                        <option selected="">2021</option>
+                    </select>
+                    <h4 class="card-title m-b-0">Total Agrupada</h4>
+                    <h2 class="m-t-0">4.586€</h2>
+                </div>
+            </div>
+            <div class="card-body b-t">
+                <table class="table v-middle no-border">
+                    <tbody>
+                        <tr>
+                            <td style="width:40px"><img src="../assets/images/users/1.jpg" width="50" class="img-circle" alt="logo"></td>
+                            <td>Bar Agustín</td>
+                            <td align="right"><span class="label label-light-info">1.800€</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="../assets/images/users/2.jpg" width="50" class="img-circle" alt="logo"></td>
+                            <td>Oyarzun</td>
+                            <td align="right"><span class="label label-light-success">800€</span></td>
+                        </tr>
+                        <tr>
+                            <td><img src="../assets/images/users/3.jpg" width="50" class="img-circle" alt="logo"></td>
+                            <td>Estética Green</td>
+                            <td align="right"><span class="label label-light-primary">300€</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Ahorros por tarifas</h4>
+                <ul class="country-state">
+                    <li>
+                        <h2>6.350</h2>
+                        <small>Tarifa 2A</small>
+                        <div class="pull-right">48% <i class="fa fa-level-up text-success"></i></div>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 48%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h2>3.250</h2>
+                        <small>Tarifa 2DHA</small>
+                        <div class="pull-right">58% <i class="fa fa-level-up text-success"></i></div>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 58%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <h2>1250</h2>
+                        <small>Tarifa 3A</small>
+                        <div class="pull-right">75% <i class="fa fa-level-down text-danger"></i></div>
+                        <div class="progress">
+                            <div class="progress-bar bg-inverse" role="progressbar" style="width: 75%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<h3>OTROS DATOS DE INTERÉS</h3>
+
+<div class="row">
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div>
+                        <h3 class="card-title m-b-5"><span class="lstick"></span>Consumo Total </h3>
+                    </div>
+                    <div class="ml-auto">
+                        <select class="custom-select b-0">
+                            <option selected="">Enero 2021</option>
+                            <option value="1">February 2021</option>
+                            <option value="2">March 2021</option>
+                            <option value="3">April 2021</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div id="sales-overview2" class="p-relative" style="height:360px;"></div>
+
+                <div class="stats-bar">
+                    <div class="row text-center">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">Consumo Total</h6>
+                                <h3 class="m-b-0">105.345</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">Este mes</h6>
+                                <h3 class="m-b-0">7,589</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">Esta semana</h6>
+                                <h3 class="m-b-0">1.476</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div>
+                        <h3 class="card-title m-b-5"><span class="lstick"></span>Sales Overview </h3>
+                    </div>
+                    <div class="ml-auto">
+                        <select class="custom-select b-0">
+                            <option selected="">January 2017</option>
+                            <option value="1">February 2017</option>
+                            <option value="2">March 2017</option>
+                            <option value="3">April 2017</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="ct-sales3-chart" class="p-relative" style="height:360px;"></div>
+                <div class="stats-bar">
+                    <div class="row text-center">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">Total Sales</h6>
+                                <h3 class="m-b-0">$10,345</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">This Month</h6>
+                                <h3 class="m-b-0">$7,589</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="p-20">
+                                <h6 class="m-b-0">This Week</h6>
+                                <h3 class="m-b-0">$1,476</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div>
+                        <h3 class="card-title m-b-5"><span class="lstick"></span>Comercios</h3>
+                    </div>
+                </div>
+                <div id="visitfromworld" style="width:100%!important; height:415px"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><span class="lstick"></span>Browser Stats</h4>
+                <table class="table browser m-t-30 no-border">
+                    <tbody>
+                        <tr>
+                            <td style="width:40px"><img src="../assets/images/browser/chrome-logo.png" alt=logo /></td>
+                            <td>Google Chrome</td>
+                            <td class="text-right">23%</td>
+                        </tr>
+                        <tr>
+                            <td><img src="../assets/images/browser/firefox-logo.png" alt=logo /></td>
+                            <td>Mozila Firefox</td>
+                            <td class="text-right">15%</td>
+                        </tr>
+                        <tr>
+                            <td><img src="../assets/images/browser/safari-logo.png" alt=logo /></td>
+                            <td>Apple Safari</td>
+                            <td class="text-right">07%</td>
+                        </tr>
+                        <tr>
+                            <td><img src="../assets/images/browser/internet-logo.png" alt=logo /></td>
+                            <td>Internet Explorer</td>
+                            <td class="text-right">09%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+              
+             
+
+

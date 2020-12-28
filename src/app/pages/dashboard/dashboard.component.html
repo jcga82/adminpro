@@ -1,3 +1,42 @@
-<p>
-  dashboard works!
-</p>
+
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Listado</h4>
+        <h6 class="card-subtitle">Listado de suministros eléctricos de la base de datos</h6>
+        <div class="table-responsive m-t-40">
+                                    
+          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">                 
+            <thead>                          
+              <tr>
+                <th>Código</th>
+                <th>Nombre</th>
+                <th>Superficie</th>
+                <th>Zona</th>
+                <th>Tipo</th>
+                <th>Actividad</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let perfil of data">
+              <tr>
+                <td>{{ perfil.codigo }}</td>
+                <td>
+                  <a href="app-contact-detail.html"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" /> {{ perfil.usuario }}</a>
+                </td>
+                <td>{{ perfil.superficie }}</td>
+                <td><span class="label label-info">{{ perfil.zona }}</span> </td>
+                <td>{{ perfil.tipoCuenta }}</td>
+                <td>{{ perfil.actividad }}</td>
+              </tr>      
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+
+               
