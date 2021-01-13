@@ -11,12 +11,15 @@ export class GraficoAreaComponent implements OnInit {
 
   @Input() titulo: string = "Sin titulo";
   @Input() label: string = "Sin label";
-  @Input() data: number[] = [];
+  @Input() data: any[] = [];
 
   Highcharts: typeof Highcharts = Highcharts;
   chartOptions: Highcharts.Options = {
     title: {
       text: ""
+    },
+    credits: {
+      enabled: false
     },
     xAxis: {
       labels: {

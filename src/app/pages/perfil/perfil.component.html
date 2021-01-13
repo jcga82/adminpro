@@ -1,0 +1,423 @@
+<div class="row">
+
+    <div class="col-lg-4 col-xlg-3 col-md-5">
+        <div class="card" *ngIf="usuario">
+            <div class="card-body">
+                <div class="m-t-30"> <img src="../assets/images/users/cabo_rojo.jpg" width="250" />
+                    <h4 class="card-title m-t-10">{{ usuario.usuario }}</h4>
+                    <i class="icon-people"></i>  <b>  {{ usuario.codigo }}</b>
+                    <h6 class="card-subtitle">{{ usuario.actividad }}</h6>
+
+                    <div class="row text-center justify-content-md-center">
+                        <div class="col-4">
+                            <img width="35px"  [src]="usuario.actividad == 'Comercio: moda, regalos, deportes...' || usuario.actividad == 'Comercio: Moda, regalos, deportes...' ? '../../assets/icon/moda.png' : '../../assets/icon/' + usuario.actividad + '.jpg'">
+                        </div>
+                        <div class="col-4 superficie-comercio">
+                            {{ usuario.superficie }} m<sup>2</sup>
+                        </div>
+                        <div class="col-4">
+                            <img width="65px" [src]="usuario.tipoCuenta ==='Iberdrola' ? '../../assets/icon/iberdrola.png' : '../../assets/icon/efergy.png'">
+                        </div>
+                    </div>
+
+                    <div class="row text-center justify-content-md-center">
+                        <span *ngIf="!usuario.abierto" class="badge badge-danger">Inactivo</span>
+                        <span *ngIf="usuario.esAgrupada" class="badge badge-success">Agrupada</span><br>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <hr> 
+            </div>
+            <div class="card-body"> 
+                <small class="text-muted">Potencia contratada:</small>
+                <h6>{{ potencia ? potencia : '' }} kW</h6>
+                <small class="text-muted">Tarifa </small>
+                <h6>{{ tarifa ? tarifa : '' }}</h6>
+                <small class="text-muted">CUPS:</small>
+                <h6>{{ cups ? cups : '' }}</h6>
+            </div>
+            <div>
+                <hr> 
+            </div>
+            <div class="card-body"> 
+                <small class="text-muted">Email </small>
+                <h6>{{ usuario.cuentaUsuario }}</h6> 
+                
+                <small class="text-muted">Teléfono</small>
+                <h6>+91 654 784 547</h6> 
+                
+                <small class="text-muted">Barrio</small>
+                <h6>{{ usuario.zona }}</h6>
+                
+                <div class="map-box">
+                    <iframe width="260" height="150" id="gmap_canvas" src="https://maps.google.com/maps?q=san%20Sebastian&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                </div> 
+                <p class="m-t-30">{{ usuario.descripcion }}
+                
+                <small class="text-muted p-t-30 db">Perfiles sociales</small>
+                <br/>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-twitter"></i></button>
+                <button class="btn btn-circle btn-secondary"><i class="fa fa-youtube"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8 col-xlg-9 col-md-7">
+        <div class="card">
+
+            <ul class="nav nav-tabs profile-tab" role="tablist">
+                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Perfil</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#consumos" role="tab">Consumos</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#novedades" role="tab">Recomendaciones</a> </li>
+                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Editar perfil</a> </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <div class="tab-pane active" id="profile" role="tabpanel">
+                    <div class="card-body" *ngIf="usuario">
+                        <h4 class="font-medium m-t-30">Calidad del dato</h4>
+                        <hr>
+                        <h5 class="m-t-30"><b>Enero 2021 ({{ calidad2021[0].numDias }} d)</b> ({{ calidad2021[0].totalCorrecto + calidad2021[0].totalEstimado + calidad2021[0].totalFallo + calidad2021[0].totalNulo + calidad2021[0].totalZero }} días - {{ calidad2021[0].totalCorrecto }} son correctos) <span class="pull-right">{{ calidad2021[0].porcentajeCorrecto | number : '1.2-2' }} %</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:1%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                        <h5>[ Fallos: {{ calidad2021[0].totalFallo }} días - Nulos: {{ calidad2021[0].totalNulo }} días - Ceros: {{ calidad2021[0].totalZero }} días ] </h5>
+                        <h5 class="m-t-30"><b>Año 2020</b> ({{ calidad2020[0].numDias }} días - {{ calidad2020[0].totalEstimado }} son estimados) <span class="pull-right">{{ calidad2020[0].porcentajeCorrecto | number : '1.2-2' }} %</span></h5>
+                        <div class="progress">
+                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:75%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                        </div>
+                        <br><br>
+                        <h4 class="font-medium m-t-30">Agrupada</h4>
+                        <hr>
+                        <h5 class="m-t-30" *ngIf="usuario.esAgrupada">Este establecimiento ya forma parte de la agrupación de consumidores eléctricos impulsada por el programa SmartKalea, con la nueva rebaja de precios se conseguirá un ahorro anual de <b>209,75€</b>.</h5>
+                        <h5 class="m-t-30" *ngIf="!usuario.esAgrupada">Este establecimiento aún no está en la agrupada.</h5>
+                        <br><br>
+                        <h4 class="font-medium m-t-30">Asesorías y Seguimientos</h4>
+                        <hr>
+                        <div>
+                            <button (click)="downloadInforme()">
+                                <i class="fa fa-download"></i> Informe Asesoría Noviembre 2020
+                            </button>
+                        </div>
+                        <br>
+                        <div>
+                            <button (click)="generarInformeSeguimiento()">
+                                <i class="fa fa-download"></i> Informe Seguimiento Abril 2020
+                            </button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="consumos" role="tabpanel">
+                    <div class="card-body" *ngIf="data">
+                        <br>Consumo anual 2020: <b>{{ consumo2020 | number : '1.0-0' }} kWh</b>
+                        <br>
+                        <!-- <ion-progress-bar color="primary" [value]="consumo2020/consumo2019"></ion-progress-bar> -->
+                        Esto supone un {{ consumo2020/consumo2019*100 | number : '1.0-0' }}% del consumo 2019
+                        <h4 class="font-medium m-t-30">Consumos</h4>
+                        <hr>
+                        <app-grafico-consumo titulo="Consumo mensual" label="Mes" [data]="data"></app-grafico-consumo>
+                        <br>
+                    </div>
+                    <div class="card-body">
+                        <app-kalea-consumos-chart *ngIf="consumo2019!=0" [consumo19]="consumo2019" [consumo20]="consumo2020"></app-kalea-consumos-chart>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="settings" role="tabpanel">
+                    <div class="card-body" *ngIf="usuario">
+                        <form class="form-horizontal m-t-40" id="updateform" [formGroup]="updateForm" (ngSubmit)="update()">
+                
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Usuario</label>
+                                        <div class="col-md-12">
+                                            <input type="text" formControlName="usuario" placeholder="Nombre" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Password</label>
+                                        <div class="col-md-12">
+                                            <input type="password" formControlName="password" placeholder="**********" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="example-email" class="col-md-12">Email</label>
+                                        <div class="col-md-12">
+                                            <input type="email" formControlName="cuentaUsuario" placeholder="email" class="form-control form-control-line" id="example-email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Teléfono</label>
+                                        <div class="col-md-12">
+                                            <input type="text" formControlName="telefono" placeholder="123 456 7890" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Zona</label>
+                                        <div class="col-sm-12">
+                                            <select formControlName="zona" class="form-control form-control-line">
+                                                <option>Alde zaharra</option>
+                                                <option>Altza</option>
+                                                <option>Sancho El Sabio</option>
+                                                <option>Otro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <label class="col-sm-12">Actividad</label>
+                                        <div class="col-sm-12">
+                                            <select formControlName="actividad" class="form-control form-control-line">
+                                                <option>Comercio: moda, regalos, deportes...</option>
+                                                <option>Alimentacion</option>
+                                                <option>Hosteleria</option>
+                                                <option>Peluqueria</option>
+                                                <option>Otro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                
+                            <div class="form-group">
+                                <label class="col-md-12">Descripción</label>
+                                <div class="col-md-12">
+                                    <textarea rows="5" formControlName="descripcion" class="form-control form-control-line"></textarea>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Actualizar perfil</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="card-body" *ngIf="usuario">
+                        <form class="form-horizontal m-t-40" id="updateFormLocalizacion" [formGroup]="updateFormLocalizacion" (ngSubmit)="updateLocalizacion()">
+                
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Latitud</label>
+                                        <div class="col-md-12">
+                                            <input type="text" formControlName="latitud" placeholder="latitud" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-12">Longitud</label>
+                                        <div class="col-md-12">
+                                            <input type="text" formControlName="longitud" placeholder="Longitud" class="form-control form-control-line">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Actualizar Localización</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="card-body" *ngIf="usuario">
+                        <form class="form-horizontal m-t-40" id="updateFormBooleanos" [formGroup]="updateFormBooleanos" (ngSubmit)="updateBooleanos()">
+                
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" formControlName="activo" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Activo</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="custom-control custom-checkbox">
+                                            <input type="checkbox" formControlName="agrupada" class="custom-control-input">
+                                            <span class="custom-control-indicator"></span>
+                                            <span class="custom-control-description">Agrupada</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="form-group">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-success">Actualizar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="novedades" role="tabpanel">
+                    <div class="card-body" *ngIf="usuario">
+                        <div class="card">
+                            <div class="card-header"> 
+                                <h5>Comentarios</h5>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Fecha</th>
+                                            <th>Comentario</th>
+                                            <th class="text-nowrap">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody *ngFor="let comentario of comentarios">
+                                        <tr>
+                                            <td>{{ comentario.date }}</td>
+                                            <td>{{ comentario.comentario }}</td>
+                                            <td class="text-nowrap">
+                                                <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
+                                                <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteComentario(comentario)"> <i class="fa fa-close text-danger"></i> </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <button class="btn btn-success" data-toggle="modal" data-target="#addComentarioModal">Añadir Comentario</button>
+                                <div #comentariosModal class="modal fade" id="addComentarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="exampleModalLabel1">Añadir comentario</h4>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form #comentariosForm="ngForm" (ngSubmit)="addComentario(comentariosForm)">
+                                                    <div class="form-group">
+                                                        <label for="recipient-name" class="control-label">Fecha:</label>
+                                                        <input type="text" name="date" [(ngModel)]="newComentario.date" class="form-control" id="recipient-name1">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="message-text" class="control-label">Comentario:</label>
+                                                        <textarea class="form-control" name="comentario" [(ngModel)]="newComentario.comentario" id="message-text1"></textarea>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                        <button type="submit" [disabled]="!comentariosForm.form.valid" class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-header"> 
+                                <h5>Mejoras</h5>
+                            </div>
+                            <div class="profiletimeline">
+                                <div class="sl-item" *ngFor="let mejora of mejoras">
+                                    <div class="sl-left"> <img src="../assets/images/users/letterT.png" alt="user" class="img-circle" /> </div>
+                                    <div class="sl-right">
+                                        <div><b>{{ mejora.titulo }}</b> <span class="sl-date"> Fecha: {{ mejora.date }}</span>
+                                            <p>
+                                                <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openMejoraModal(mejora)"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
+                                                <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteMejora(mejora)"> <i class="fa fa-close text-danger"></i> </a>
+                                            </p>
+                                            <p>{{ mejora.descripcion }}</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div #mejorasModal class="modal fade" id="addMejoraModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title" id="exampleModalLabel1">Añadir mejora</h4>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form #mejorasForm="ngForm" (ngSubmit)="addMejora(mejorasForm)">
+                                                        <div class="form-group">
+                                                            <label for="recipient-name" class="control-label">Fecha:</label>
+                                                            <input type="text" name="date" [(ngModel)]="newMejora.date" class="form-control" id="recipient-name1">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name" class="control-label">Tag:</label>
+                                                            <input type="text" name="tag" [(ngModel)]="newMejora.tag" class="form-control" id="recipient-name2">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="recipient-name" class="control-label">Título:</label>
+                                                            <input type="text" name="titulo" [(ngModel)]="newMejora.titulo" class="form-control" id="recipient-name3">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="message-text" class="control-label">Descripción:</label>
+                                                            <textarea class="form-control" name="descripcion" [(ngModel)]="newMejora.descripcion" id="message-text1"></textarea>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                            <button type="submit" [disabled]="!mejorasForm.form.valid" class="btn btn-success">Guardar</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <div class="sl-item">
+                                    <div class="sl-left"> <img src="../assets/images/users/2.jpg" alt="user" class="img-circle" /> </div>
+                                    <div class="sl-right">
+                                        <div> <a href="#" class="link">{{ usuario.usuario }}</a> <span class="sl-date">5 minutes ago</span>
+                                            <div class="m-t-20 row">
+                                                <div class="col-md-3 col-xs-12"><img src="../assets/images/big/imgInforme.png" alt="user" class="img-responsive radius" /></div>
+                                                <div class="col-md-9 col-xs-12">
+                                                    <p>disponible nuevo informe <a href="#"> Informe de seguimiento</a></p><a href="#" class="btn btn-primary"> Descargar</a></div>
+                                            </div>
+                                            <div class="like-comm m-t-20"> <a href="javascript:void(0)" class="link m-r-10">2 comentarios</a> <a href="javascript:void(0)" class="link m-r-10"><i class="fa fa-heart text-danger"></i> 1 OK</a> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="sl-item">
+                                    <div class="sl-left"> <img src="../assets/images/users/4.jpg" alt="user" class="img-circle" /> </div>
+                                    <div class="sl-right">
+                                        <div><a href="#" class="link">{{ usuario.usuario }}</a> <span class="sl-date">5 minutes ago</span>
+                                            <blockquote class="m-t-10">
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                            </blockquote>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                            </div>
+                        </div>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#addMejoraModal">Añadir Mejora</button>
+                    </div>
+
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

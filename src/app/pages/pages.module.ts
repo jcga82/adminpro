@@ -9,13 +9,19 @@ import { PagesComponent } from './pages.component';
 import { PAGES_ROUTES } from './pages.routes';
 import { ComponentsModule } from '../components/components.module';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { PerfilComponent } from './perfil/perfil.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { PipesModule } from '../pipes/pipes.module';
+import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 
 @NgModule({
     declarations: [
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
-        PagesComponent
+        PagesComponent,
+        PerfilComponent
     ],
     exports: [
         DashboardComponent,
@@ -24,12 +30,18 @@ import { NgxGaugeModule } from 'ngx-gauge';
         PagesComponent
     ],
     imports: [
+        CommonModule,
         SharedModule,
         BrowserModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
         PAGES_ROUTES,
         ComponentsModule,
-        NgxGaugeModule
-    ]
+        NgxGaugeModule,
+        PipesModule,
+    ],
+    providers: [DatePipe, DecimalPipe],
 })
 
 export class PagesModule {  }

@@ -1,9 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Apollo } from 'apollo-angular';
+import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora } from 'src/assets/querys/querysGraphql';
 
+import { Users } from 'src/assets/querys/querysGraphql';
 import { environment } from 'src/environments/environment';
-import { RespuestaGetMyData } from '../interfaces/interfaces';
-
+import { Comentario, MejoraPropuesta, RespuestaGetMyData, Usuario } from '../interfaces/interfaces';
+import Swal from 'sweetalert2'
+import { DatePipe } from '@angular/common';
 
 const URL = environment.url;
 
@@ -18,7 +22,8 @@ export class UsuariosService {
 
   constructor(
     private http: HttpClient,
-    private storage: Storage,
+    private apollo: Apollo,
+    private datePipe: DatePipe,
   ) { }
 
 
@@ -31,15 +36,17 @@ export class UsuariosService {
 
     return new Promise ( resolve => {
 
-      this.http.post(URL + '/api-token-auth/', body)
+      this.http.post('https://smartkaleaenergia.com/es/api-token-auth/', body)
         .subscribe((resp: any) => {
           console.log(resp);
+    
+          resp.token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZTgxOTRiZTYzODI5ODA0ZjA0MWUxNGUiLCJuYW1lIjoiYWRtaW4iLCJtYWlsIjoiYWRtaW5AbGV0dGVyLmVzIiwibGV2ZWwiOiJBRE1JTiIsImV4cCI6MTYwOTQ5MzMyM30.AbWOn3pOik11ftYYoog00jr0vcAgsWbFfqQpYAm1gWQ";
           this.guardarToken(resp.token);
           resolve(true);
         }, (err: HttpErrorResponse) => {
           console.log(err);
           this.token = null;
-          this.storage.clear();
+          localStorage.clear();
           resolve(false);
         }
         );
@@ -47,7 +54,7 @@ export class UsuariosService {
   }
 
   logout() {
-    this.storage.clear();
+    localStorage.clear();
     // this.navCrtl.navigateRoot('/login', {animated: true});
   }
 
@@ -68,18 +75,16 @@ export class UsuariosService {
 
   async guardarToken( token: string) {
     this.token = token;
-    // this.tokenInformes = token;
-    // this.storage.clear();
-    await this.storage.set('token', token);
+    await localStorage.setItem('token', token);
   }
 
   async cargarToken() {
     console.log('llega al cargarToken');
-    this.token = await this.storage.get('token') || null;
+    this.token = await localStorage.getItem('token') || null;
   }
 
   async cargarTokenInformes() {
-    return  await this.storage.get('tokenInformes') || null;
+    return  await localStorage.get('tokenInformes') || null;
   }
 
 
@@ -154,6 +159,170 @@ export class UsuariosService {
 
       return this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate2/1000 + '&endDate=' + toDate2/1000 + '&granularity=Months' + '&contrato_id=' + contrato + '&as_user=' + user, headers);
   }
+
+  public cargarPerfiles() {
+    return this.apollo.watchQuery({ query: Users })
+      .valueChanges
+  }
+
+  public cambiarBooleanos(cuenta: any) {
+    console.log(cuenta);
+    this.apollo.mutate(
+      { mutation: MutateCambiarBooleanos,
+        variables: {
+          identificador: cuenta.identifier,
+          valorAgrupada: cuenta.agrupada,
+          valorActivo: cuenta.acctivo
+        } 
+      })
+      .subscribe((result: any) => {
+        console.log(result);
+        Swal.fire({
+          title: 'Checks Agrupada/Activo',
+          text: 'Los checks han sido actualizados correctamente.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+    });
+  }
+
+  public cambiarLocalizacion(cuenta: any) {
+    console.log(cuenta);
+    this.apollo.mutate(
+      { mutation: MutateLocalizacion,
+        variables: {
+          identificador: cuenta.identifier,
+          valorLongitud: Number(cuenta.longitud),
+          valorLatitud: Number(cuenta.latitud)
+        } 
+      })
+      .subscribe((result: any) => {
+        console.log(result);
+        Swal.fire({
+          title: 'Localización',
+          text: 'La localización ha sido añadida/actualizada correctamente.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+      },(error) => {
+        console.log('Hay un error', error);
+        Swal.fire({
+          title: 'Error Localización',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      });
+    }
+
+  public cambiarPerfil(cuenta: any) {
+    console.log(cuenta);
+    this.apollo.mutate(
+      { mutation: MutatePerfil, //cambiar el resto de propiedades del mutate ANTONIO unir con cambiar nombreInforme
+        variables: {
+          identifier: cuenta.identifier,
+          descripcion: cuenta.descripcion
+        } 
+      })
+      .subscribe((result: any) => {
+        console.log(result);
+        Swal.fire({
+          title: 'Perfil',
+          text: 'El perfil ha sido actualizado correctamente.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+      },(error) => {
+        console.log('Hay un error', error);
+        Swal.fire({
+          title: 'Error al actualizar',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      });
+    }
+
+    // Comentarios y Mejoras
+
+    public addComentario(identifier: string, comentario: Comentario) {
+      return this.apollo.mutate(
+        { mutation: MutateAddComentario,
+          variables: {
+            profileId: identifier,
+            date: this.datePipe.transform(comentario.date, 'yyyy-MM-dd'),
+            comentario: comentario.comentario
+          } 
+        })
+    }
+
+    public editComentario(identifier: string, comentarioPrev: Comentario, comentarioPost: Comentario) {
+      console.log(identifier, comentarioPrev, comentarioPost);
+      return this.apollo.mutate(
+        { mutation: MutateEditComentario,
+          variables: {
+            profileId: identifier,
+            oldDate: this.datePipe.transform(comentarioPrev.date, 'yyyy-MM-dd'),
+            oldComentario: comentarioPrev.comentario,
+            newDate: this.datePipe.transform(comentarioPost.date, 'yyyy-MM-dd'),
+            newComentario: comentarioPost.comentario
+          } 
+        })
+    }
+
+    public deleteComentario(identifier: string, comentario: Comentario) {
+      return this.apollo.mutate(
+        { mutation: MutateDeleteComentario,
+          variables: {
+            profileId: identifier,
+            date: this.datePipe.transform(comentario.date, 'yyyy-MM-dd'),
+            comentario: comentario.comentario
+          } 
+        })
+    }
+
+    public addMejora(identifier: string, mejora: MejoraPropuesta) {
+      console.log(identifier, mejora);
+      return this.apollo.mutate(
+        { mutation: MutateAddMejora,
+          variables: {
+            profileId: identifier,
+            date: this.datePipe.transform(mejora.date, 'yyyy-MM-dd'),
+            titulo: mejora.titulo,
+            tag: mejora.tag,
+            descripcion: mejora.descripcion
+          } 
+        })
+    }
+
+    public editMejora(identifier: string, mejoraPrev: MejoraPropuesta, mejoraPost: MejoraPropuesta) {
+      return this.apollo.mutate(
+        { mutation: MutateEditMejora,
+          variables: {
+            profileId: identifier,
+            oldDate: this.datePipe.transform(mejoraPrev.date, 'yyyy-MM-dd'),
+            oldDescripcion: mejoraPrev.descripcion,
+            oldTitulo: mejoraPrev.titulo,
+            newDate: this.datePipe.transform(mejoraPost.date, 'yyyy-MM-dd'),
+            newDescripcion: mejoraPost.descripcion,
+            newTitulo: mejoraPost.titulo,
+            tag: mejoraPrev.tag
+          } 
+        })
+    }
+
+    public deleteMejora(identifier: string, mejora: MejoraPropuesta) {
+      return this.apollo.mutate(
+        { mutation: MutateDeleteMejora,
+          variables: {
+            profileId: identifier,
+            date: this.datePipe.transform(mejora.date, 'yyyy-MM-dd'),
+            // tag: mejora.tag,
+            titulo: mejora.titulo,
+            descripcion: mejora.descripcion
+          } 
+        })
+    }
 
 
 }

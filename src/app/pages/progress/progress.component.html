@@ -15,6 +15,7 @@
     </div>
   </div>
 </div> -->
+<app-agrupada-tarifas-chart></app-agrupada-tarifas-chart>
 
 <div class="row">
     <div class="col-lg-3 col-md-6">
@@ -114,13 +115,13 @@
                 <h4 class="card-title">Novedades</h4>
                 <ul class="feeds">
                     <li>
-                        <div class="bg-light-info"><i class="fa fa-bell-o"></i></div> You have 4 pending tasks. <span class="text-muted">Just Now</span></li>
+                        <div class="bg-light-info"><i class="fa fa-bell-o"></i></div> Informe de Agrupada <span class="text-muted">Ahora</span></li>
                     <li>
-                        <div class="bg-light-success"><i class="ti-server"></i></div> Server #1 overloaded.<span class="text-muted">2 Hours ago</span></li>
+                        <div class="bg-light-success"><i class="ti-server"></i></div> Disponible informe<span class="text-muted">2 Hours ago</span></li>
                     <li>
-                        <div class="bg-light-warning"><i class="ti-shopping-cart"></i></div> New order received.<span class="text-muted">31 May</span></li>
+                        <div class="bg-light-warning"><i class="ti-shopping-cart"></i></div> Nuevo comercio añadido<span class="text-muted">31 Dic</span></li>
                     <li>
-                        <div class="bg-light-danger"><i class="ti-user"></i></div> New user registered.<span class="text-muted">30 May</span></li>
+                        <div class="bg-light-danger"><i class="ti-user"></i></div> Nueva vivienda añadida<span class="text-muted">30 Dic</span></li>
                 </ul>
             </div>
         </div>
@@ -277,6 +278,12 @@
                             <td>3.0A</td>
                             <td class="font-medium">0.0638 €/kWh</td>
                         </tr>
+                        <br>
+                        <div>
+                            <button (click)="generarInformeAgrupada()">
+                                <i class="fa fa-download"></i> Informe Agrupada Enero 2021
+                            </button>
+                        </div>
                     </tbody>
                 </table>
             </div>
@@ -372,7 +379,7 @@
                     </div>
                 </div>
                 
-                <div id="sales-overview2" class="p-relative" style="height:360px;"></div>
+                <!-- <div id="sales-overview2" class="p-relative" style="height:360px;"></div> -->
 
                 <div class="stats-bar">
                     <div class="row text-center">
@@ -416,7 +423,7 @@
                         </select>
                     </div>
                 </div>
-                <div id="ct-sales3-chart" class="p-relative" style="height:360px;"></div>
+                <!-- <div id="ct-sales3-chart" class="p-relative" style="height:360px;"></div> -->
                 <div class="stats-bar">
                     <div class="row text-center">
                         <div class="col-lg-4 col-md-4">

@@ -4,31 +4,84 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Listado</h4>
-        <h6 class="card-subtitle">Listado de suministros eléctricos de la base de datos</h6>
+        <h4 class="card-title">Suministros eléctricos</h4>
+        <h6 class="card-subtitle">Listado de suministros eléctricos de la base de datos. Puedes filtrar en las búsquedas y desplegables.</h6>
         <div class="table-responsive m-t-40">
+
+          <div class="row justify-content-center">
+            <div>
+              <h6><input [(ngModel)]="textoBuscar" placeholder="Buscar usuario..."></h6>
+            </div>
+            &nbsp;
+            <div>
+              <h6>
+                <select
+                  name="zonaComercio"
+                  [(ngModel)]="zonaComercio">
+                  <option disabled selected>Selecciona una zona</option>
+                  <option
+                    *ngFor="let zona of zonas"
+                    [value]="zona">{{zona}}</option>
+                </select>
+              </h6>
+            </div>
+            &nbsp;
+            <div>
+              <h6>
+                <select
+                  name="zonaActividad"
+                  [(ngModel)]="tipoComercio">
+                  <option disabled selected>Selecciona una actividad</option>
+                  <option
+                    *ngFor="let actividad of actividades"
+                    [value]="actividad">{{actividad}}</option>
+                </select>
+              </h6>
+            </div>
+          </div>
+
+          <!-- <div class="clear-selection" title="Click to Clear Selections" (click)="clearSelection()" *ngIf="selected_count">Clear Selection</div> -->
+
+          <div class="row justify-content-center">
+            <div>
+              <!-- <input type="checkbox" value="comerciosOn" (change)="toggleVisibility($event)"> -->
+              <input type="button" value="Filtra Comercios" (click)="toggleVisibility($event)">
+            </div>
+            &nbsp;
+          </div>
                                     
-          <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">                 
+        <table id="example23" class="display nowrap table table-hover" cellspacing="0" width="100%">                 
             <thead>                          
               <tr>
                 <th>Código</th>
                 <th>Nombre</th>
+                <th>Etiquetas</th>
                 <th>Superficie</th>
-                <th>Zona</th>
-                <th>Tipo</th>
+                <th>Barrio</th>
+                <th>Conexión</th>
                 <th>Actividad</th>
               </tr>
             </thead>
-            <tbody *ngFor="let perfil of data">
+            <tbody *ngFor="let perfil of data | filtro:textoBuscar | filtro:zonaComercio:'zona' | filtroActividad:viviendasOn:comerciosOn">
               <tr>
                 <td>{{ perfil.codigo }}</td>
                 <td>
-                  <a href="app-contact-detail.html"><img src="../assets/images/users/1.jpg" alt="user" class="img-circle" /> {{ perfil.usuario }}</a>
+                  <a routerLink="{{'perfil/' + perfil.usuario}}">
+                    <b>{{ perfil.usuario }}</b>
+                  </a>
                 </td>
-                <td>{{ perfil.superficie }}</td>
+                <td>
+                  <span *ngIf="perfil.esAgrupada" class="badge badge-success">Agrupada</span><br>
+                  <span *ngIf="!perfil.abierto" class="badge badge-danger">Inactivo</span>
+                </td>
+                <td>{{ perfil.superficie }} m<sup>2</sup></td>
                 <td><span class="label label-info">{{ perfil.zona }}</span> </td>
-                <td>{{ perfil.tipoCuenta }}</td>
-                <td>{{ perfil.actividad }}</td>
+                <td>
+                  <img width="50px" [src]="perfil.tipoCuenta ==='Iberdrola' ? '../../assets/icon/iberdrola.png' : '../../assets/icon/efergy.png'">
+                </td>
+                <td>
+                  <img width="35px"  [src]="perfil.actividad == 'Comercio: moda, regalos, deportes...' || perfil.actividad == 'Comercio: Moda, regalos, deportes...' ? '../../assets/icon/moda.png' : '../../assets/icon/' + perfil.actividad + '.jpg'">
+                </td>
               </tr>      
             </tbody>
           </table>

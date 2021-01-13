@@ -1,0 +1,31 @@
+
+<div class="modal-header">
+    <h4 class="modal-title" id="exampleModalLabel1">Editar mejora</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+</div>
+<div class="modal-body">
+    <form #mejoraEditForm="ngForm" (ngSubmit)="editMejora(mejoraEditForm.form.value)">
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Fecha:</label>
+            <input type="text" name="date" [(ngModel)]="newMejora.date" class="form-control" id="recipient-name1">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Título:</label>
+            <input type="text" name="titulo" [(ngModel)]="newMejora.titulo" class="form-control" id="message-text1">
+        </div>
+        <div class="form-group">
+            <label for="recipient-name" class="control-label">Tag:</label>
+            <input  type="text" name="tag" [(ngModel)]="newMejora.tag" class="form-control" id="message-text1">
+        </div>
+        <div class="form-group">
+            <label for="message-text" class="control-label">Descripcion:</label>
+            <textarea class="form-control" name="descripcion" [(ngModel)]="newMejora.descripcion" id="message-text1"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(mejora)">Cancelar</button>
+            <button type="button" class="btn btn-success" (click)="activeModal.close(newMejora)">Guardar</button>
+        </div>
+    </form>
+</div>

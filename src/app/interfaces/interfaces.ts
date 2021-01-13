@@ -1,4 +1,15 @@
 
+export interface Comentario {
+  date: Date;
+  comentario: string;
+}
+
+export interface MejoraPropuesta {
+  date: Date;
+  titulo: string;
+  descripcion: string;
+  tag?: string;
+}
 
 export interface Usuario {
   identifier: string;
@@ -10,17 +21,17 @@ export interface Usuario {
   zona?: string;
   superficie?: number;
   // id_usuario: number;
-  // comentarios: Comentario[];
-  // mejoras: MejoraPropuesta[];
-  // id_perfil: number;
+  comentarios: Comentario[];
+  mejoras: MejoraPropuesta[];
+  id_perfil: number;
   // nombre_perfil: string;
   // ahorro_agrupada?: number;
   // texto?: string;
-  // descripcion?: string;
+  descripcion?: string;
   // imagen?: string;
   // acceso_iberdrola?: boolean;
-  // consumos_anuales?: ConsumoAnualKalea[];
-  // tituloInforme?: string;
+  consumos_anuales?: ConsumoAnualKalea[];
+  tituloInforme?: string;
 }
 
 export interface RespuestaGetMyData {
@@ -70,4 +81,34 @@ export interface Menu {
   icon: string;
   name: string;
   redirect: string;
+}
+
+// Informes
+
+export interface InformeImage {
+  id: string;
+  cuenta: string;
+  is_background: boolean;
+  is_trending_up: boolean;
+  is_trending_down: boolean;
+  data: string;
+}
+
+export function createInformeImage(params: Partial<InformeImage>) {
+  return {
+    id: params.id,
+    cuenta: params.cuenta,
+    is_background: params.is_background,
+    is_trending_up: params.is_trending_up,
+    is_trending_down: params.is_trending_down,
+    data: params.data
+  } as InformeImage;
+}
+
+export interface ConsumoAnualKalea {
+  idPerfil: number;
+  year: Date;
+  consumoWh: number;
+  initDate?: string;
+  endDate?: string;
 }
