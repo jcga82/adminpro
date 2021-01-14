@@ -28,7 +28,7 @@ export class DashboardComponent implements OnInit {
     .subscribe((result: any) => {
       console.log(result);
       this.data = result.data.profiles;
-  });
+    });
   }
 
   toggleVisibility(e: any){

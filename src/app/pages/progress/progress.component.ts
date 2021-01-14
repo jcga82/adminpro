@@ -3,6 +3,7 @@ import { Apollo } from 'apollo-angular';
 import { AgrupadaTarifasChartComponent } from 'src/app/components/agrupada-tarifas-chart/agrupada-tarifas-chart.component';
 import { PdfInformeAgrupadaService } from 'src/app/services/pdf-informe-agrupada.service';
 import { PdfInformeSemestralService } from 'src/app/services/pdf-informe-semestral.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 import { CalidadDatoTotal } from 'src/assets/querys/querysGraphql';
 
 @Component({
@@ -11,6 +12,31 @@ import { CalidadDatoTotal } from 'src/assets/querys/querysGraphql';
   styles: []
 })
 export class ProgressComponent implements OnInit, AfterViewInit {
+
+  data: any[] = [];
+  datosBasicos = [
+    {
+      nombre: 'Usuarios',
+      valor: 0,
+      icono: 'mdi mdi-account-circle',
+      color: 'css-bar-primary'
+    },{
+      nombre: 'Comercios',
+      valor: 0,
+      icono: 'mdi mdi-briefcase-check',
+      color: 'css-bar-danger'
+    },{
+      nombre: 'Viviendas',
+      valor: 0,
+      icono: 'mdi mdi-star-circle',
+      color: 'css-bar-warning'
+    },{
+      nombre: 'Agrupada',
+      valor: 0,
+      icono: 'mdi mdi-receipt',
+      color: 'css-bar-success'
+    },
+  ];
 
   // Grafico Donuts
   labelsDonuts: string[] = ['Parte Vieja', 'Altza', 'Sancho El Sabio'];
@@ -58,9 +84,30 @@ export class ProgressComponent implements OnInit, AfterViewInit {
   constructor(
     private pdfInformeAgrupada: PdfInformeAgrupadaService,
     private pdfInformeSemestral: PdfInformeSemestralService,
+    private usuariosServices: UsuariosService
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+
+    await this.usuariosServices.cargarPerfiles()
+    .subscribe((result: any) => {
+      console.log(result);
+      this.data = result.data.profiles;
+      this.datosBasicos[0].valor = this.data.length;
+      const arrayComercios = this.data.filter( (data: any) => {
+        return (data.actividad != 'Vivienda');
+      });
+      this.datosBasicos[1].valor = arrayComercios.length;
+      const arrayViviendas = this.data.filter( (data: any) => {
+        return (data.actividad == 'Vivienda');
+      });
+      this.datosBasicos[2].valor = arrayViviendas.length;
+      const arrayAgrupada = this.data.filter( (data: any) => {
+        return data.esAgrupada;
+      });
+      this.datosBasicos[3].valor = arrayAgrupada.length;
+
+    });
     
   }
 
@@ -81,15 +128,15 @@ export class ProgressComponent implements OnInit, AfterViewInit {
 
   generarInformeAsesorias() {
     const resumen = {
-      comercios: 'En este estudio han participado \n un total de 25 comercios. \n La mayoría de ellos pertenecen \n al sector moda y estética, aunque \n también hay comercios de \n  restauración y otras tipologías. \n De los 25 comercios, 7 \n pertenecen al barrio de Altza, \n 11 se encuentran en la Parte \nVieja y 7 en el barrio de Sancho \n el Sabio.',
+      comercios: 'En este estudio han participado \n un total de 25 comercios. \n La mayoría de ellos pertenecen \n al sector moda y estética, aunque \n también hay comercios de \n  restauración y otras tipologías. \n De los 25 comercios, 7 \n pertenecen al barrio de Altza, \n 11 se encuentran en la Parte \nVieja y 7 en la calle de Sancho \n el Sabio.',
       agrupada: 'En 19 de los 25 comercios se \n ha detectado un ahorro al incluirse \n en la compra agrupada de energía. \n Tan solo uno de los comercios no \nobtendría ahorro económico al \n acogerse a esta medida y en los 5 \n restantes no se dispone de los datos. \nEl ahorro total estimado \nes de 7.137 €',
-      consumo: 'Consumo anual por comercio. \n Es interesante para comparar\n consumos de comercios\n del estudio.',
+      consumo: 'El consumo eléctrico medio por \n comercio es de 142 KWh/m2 al año.',
       tarifas: 'El 77,3 % de los comercios \ntiene una tarifa 2.0A (5 de \nestos comercios tienen \ndiscriminación horaria), el \n 18,2 % tiene una tarifa 2.1A (sólo 2 \ncomercios tienen discriminación \nhoraria) y el 4,5% tiene la \ntarifa 3.0A',
       intro: 'Este informe describe las diversas medidas de eficiencia energética propuestas a los comercios participantes en el proyecto Smartkalea una vez se ha realizado la campaña de auditorías energéticas y se han identificado las posibles mejoras de ahorro en las instalaciones de los diversos comercios.',
       medidas: 'En todos los comercios participantes en el programa se han identificado posibles medidas de eficiencia energética en sus instalaciones, principalmente relacionadas con la renovación tecnológica de la iluminación (interior y/o exterior) a LED, proponiéndose este tipo de medida en 18 de los 25 comercios.\n\n El 28% de los comercios ya cuentan con iluminación LED',
-      optimizacion: 'Con respecto a la potencia contratada se observa que muchos comercios disponen de una potencia superior a la necesaria, y por tanto, en 15 de los 25 comercios se propone una disminución de la potencia contratada y/o tarifa eléctrica, que puede repercutir en un ahorro económico de un 7%.',
+      optimizacion: 'Con respecto a la potencia contratada se observa que muchos comercios disponen de una potencia superior a la necesaria, y por tanto, en 15 de los 25 comercios se propone una disminución de la potencia contratada, que puede repercutir en un ahorro económico de un 7%.',
       evolucion: 'En cuanto al consumo energético del último año obtenemos un total de 150.904 kWh/año. Se estima que una reducción del consumo de un 45% en caso de llevar a cabo todas las medidas propuestas en los diversos comercios.',
-      observaciones: 'En la mayoría de los comercios al menos se ha propuesto una medida de ahorro energético. Es recomendable continuar con la labor informativa sobre el positivo impacto que estas medidas tienen en la competitividad de los negocios a través de la reducción del gasto energético. \n\n Utilizar ejemplos de buenas prácticas de otros comercios cercanos y sus datos de ahorro económico pueden tener mayor repercusión a la hora de estimular la inversión en medidas de eficiencia energética. Las de mayor impacto suelen ser en los sistemas de iluminación y climatización.'
+      observaciones: 'En la mayoría de los comercios al menos se ha propuesto una medida de ahorro energético. Es recomendable continuar con la labor informativa sobre el impacto positivo que estas medidas tienen en la competitividad de los negocios a través de la reducción del gasto energético. \n\n Utilizar ejemplos de buenas prácticas de otros comercios cercanos y sus datos de ahorro económico pueden tener mayor repercusión a la hora de estimular la inversión en medidas de eficiencia energética. Las de mayor impacto suelen ser en los sistemas de iluminación y climatización.'
       }
     this.pdfInformeSemestral.generatePdf(resumen);
   }

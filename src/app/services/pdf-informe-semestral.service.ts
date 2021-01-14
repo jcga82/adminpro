@@ -77,26 +77,26 @@ export class PdfInformeSemestralService {
               absolutePosition: { x: 40, y: 415 }
             },
             {
-              text: '142 kWh/m2 y año',
+              text: 'Consumo anual medio',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 550 }
+              absolutePosition: { x: 40, y: 555 }
             },
             {
               text: resumen.consumo,
               margin: [0, 0, 0, 0],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 575 }
+              absolutePosition: { x: 40, y: 585 }
             },
             {
               text: 'Tarifa Contratada',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 650 }
+              absolutePosition: { x: 40, y: 620 }
             },
             {
               text: [
               { text: resumen.tarifas }],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 670 }
+              absolutePosition: { x: 40, y: 650 }
             },
             {
               text: 'Eficiencia Energética',
@@ -148,7 +148,7 @@ export class PdfInformeSemestralService {
             body: [
               [ 'Tipo de Medida', 'Núm. Comercios', 'Ahorro estimado'],
               [ 'Iluminación LED', 18, '13%'],
-              [ 'Optimizacvión de tarifa', 15, '7%'],
+              [ 'Optimización de tarifa', 15, '7%'],
               [ 'Compra agrupada de energía', 19, '26%'],
               [ 'Buenas prácticas', 25, '20%'],
             ]

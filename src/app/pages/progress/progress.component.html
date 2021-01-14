@@ -15,68 +15,22 @@
     </div>
   </div>
 </div> -->
-<app-agrupada-tarifas-chart></app-agrupada-tarifas-chart>
+<!-- <app-agrupada-tarifas-chart></app-agrupada-tarifas-chart> -->
 
 <div class="row">
-    <div class="col-lg-3 col-md-6">
+    <div class="col-lg-3 col-md-6" *ngFor="let dato of datosBasicos">
         <div class="card">
             <div class="card-body">
                 <div class="row p-t-10 p-b-10">
-                
                     <div class="col p-r-0">
-                        <h1 class="font-light">86</h1>
-                        <h6 class="text-muted">Usuarios</h6></div>
-                
+                        <h1 class="font-light">{{ dato.valor }}</h1>
+                        <h6 class="text-muted">{{ dato.nombre }}</h6></div>
                     <div class="col text-right align-self-center">
-                        <div data-label="90%" class="css-bar m-b-0 css-bar-primary css-bar-80"><i class="mdi mdi-account-circle"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row p-t-10 p-b-10">
-                
-                    <div class="col p-r-0">
-                        <h1 class="font-light">66</h1>
-                        <h6 class="text-muted">Comercios</h6></div>
-                
-                    <div class="col text-right align-self-center">
-                        <div data-label="80%" class="css-bar m-b-0 css-bar-danger css-bar-90"><i class="mdi mdi-briefcase-check"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row p-t-10 p-b-10">
-                
-                    <div class="col p-r-0">
-                        <h1 class="font-light">27</h1>
-                        <h6 class="text-muted">Agrupada</h6></div>
-                
-                    <div class="col text-right align-self-center">
-                        <div data-label="100%" class="css-bar m-b-0 css-bar-warning css-bar-100"><i class="mdi mdi-star-circle"></i></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-md-6">
-        <div class="card">
-            <div class="card-body">
-                <div class="row p-t-10 p-b-10">
-                
-                    <div class="col p-r-0">
-                        <h1 class="font-light">66</h1>
-                        <h6 class="text-muted">Iberdrola</h6></div>
-                
-                    <div class="col text-right align-self-center">
-                        <div data-label="75%" class="css-bar m-b-0 css-bar-info css-bar-95"><i class="mdi mdi-receipt"></i></div>
+                        <div 
+                            data-label="90%" 
+                            class="css-bar css-bar-80"
+                            [class]="dato.color">
+                        <i [class]="dato.icono"></i></div>
                     </div>
                 </div>
             </div>
