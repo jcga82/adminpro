@@ -95,6 +95,28 @@ query PruebaEstimaciones($oidProfile: String, $initDate: Date, $endDate: Date) {
 }
 `;
 
+export const CalidadDatoTotal = gql`
+query estimacion($initDate: Date,$endDate: Date) {
+  analisisEst: analisisCompleto(initDate:$initDate,endDate: $endDate) {
+    oidProfile
+    nombrePerfil
+    initDate
+    endDate
+    numDias
+    totalCorrecto
+    totalEstimado
+    totalZero
+    totalNulo
+    totalFallo
+    porcentajeCorrecto
+    porcentajeEstimado
+    porcentajeZero
+    porcentajeNulo
+    porcentajeFallo
+  }
+}
+`;
+
 export const MutatePerfil = gql`
   mutation SetDescripcionCuenta (\
     $identifier: String,\

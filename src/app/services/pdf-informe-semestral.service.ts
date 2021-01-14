@@ -31,7 +31,7 @@ export class PdfInformeSemestralService {
                 x: 20,
                 y: 150,
                 w: 195,
-                h: 600,
+                h: 610,
                 r: 5,
                 color: '#d9d9d9'
               },
@@ -44,7 +44,7 @@ export class PdfInformeSemestralService {
           },
           [
             {
-              text: 'INFORME DE COMPRA AGRUPADA DE ENERGÍA ELÉCTRICA',
+              text: 'INFORME DE EFICIENCIA ENERGÉTICA',
               style: 'titulo',
               absolutePosition: { x: 50, y: 90 }
             },
@@ -55,61 +55,68 @@ export class PdfInformeSemestralService {
               absolutePosition: { x: 60, y: 130 }
             },
             {
-              text: 'COMERCIOS',
+              text: 'Comercios',
               style: 'mediumHeader',
               absolutePosition: { x: 40, y: 200 }
             },
             {
               text: resumen.comercios,
               margin: [0, 0, 0, 0],
+              style: 'fontBarraGris',
               absolutePosition: { x: 40, y: 225 }
             },
             {
-              text: 'TARIFAS',
+              text: 'Compra Agrupada',
               style: 'mediumHeader',
               absolutePosition: { x: 40, y: 390 }
             },
             {
-              image: resumen.grafico,
-              width: 280,
-              absolutePosition: { x: -10, y: 420 }
+              text: resumen.agrupada,
+              margin: [0, 0, 0, 0],
+              style: 'fontBarraGris',
+              absolutePosition: { x: 40, y: 415 }
             },
             {
-              text: 'PRECIOS',
+              text: '142 kWh/m2 y año',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 600 }
+              absolutePosition: { x: 40, y: 550 }
             },
-            // { canvas: [{ type: 'line', x1: 390, y1: -1, x2: 510, y2: -150, lineWidth: 2 }] },
-
             {
-              text: 'Compra Agrupada',
+              text: resumen.consumo,
+              margin: [0, 0, 0, 0],
+              style: 'fontBarraGris',
+              absolutePosition: { x: 40, y: 575 }
+            },
+            {
+              text: 'Tarifa Contratada',
+              style: 'mediumHeader',
+              absolutePosition: { x: 40, y: 650 }
+            },
+            {
+              text: [
+              { text: resumen.tarifas }],
+              style: 'fontBarraGris',
+              absolutePosition: { x: 40, y: 670 }
+            },
+            {
+              text: 'Eficiencia Energética',
               style: 'greatHeader',
               absolutePosition: { x: 240, y: 250 }
             },
             {
               text: [
-              { text: resumen.ahorro }],
+              { text: resumen.intro }],
               absolutePosition: { x: 240, y: 280 }
             },
             {
-              text: 'Nexus Energía',
+              text: 'Medidas de ahorro',
               style: 'greatHeader',
               absolutePosition: { x: 240, y: 380 }
             },
             {
               text: [
-              { text: resumen.nexus }],
+              { text: resumen.medidas }],
               absolutePosition: { x: 240, y: 410 }
-            },
-            {
-              text: 'Conclusiones',
-              style: 'greatHeader',
-              absolutePosition: { x: 240, y: 490 }
-            },
-            {
-              text: [
-              { text: resumen.tarifas }],
-              absolutePosition: { x: 240, y: 520 }
             },
             {
               image: dibujo,
@@ -119,30 +126,66 @@ export class PdfInformeSemestralService {
           ]
         ]
       },
-
-      {
-        layout: 'lightHorizontalLines', // optional
-        absolutePosition: { x: 40, y: 630 },
-        style: 'fontTable',
-        table: {
-          widths: [ 35, 32, 32, 32 ],
-          body: [
-            [ 'Tarifa', 'P1', 'P2', 'P3'],
-            [ '2.0A', 0.1144, '', '' ],
-            [ '2.0DHA', 0.1342, 0.0636, '' ],
-            [ '2.1A', 0.1271, '', '' ],
-            [ '2.1DHA', 0.1481, 0.074, '' ],
-            [ '3.0A', 0.0949, 0.0822, 0.063],
-            // [ { text: '100', bold: true }, { text: '200', bold: true } ]
-          ]
-        }
-      },
       {
         text: [
         { text: 'Letter Ingenieros SL' }],
         style: 'mediumHeader',
+        pageBreak: 'after',
         absolutePosition: { x: 380, y: 790 }
       },
+
+      [
+        {
+          text: 'Cuadro resumen de ahorros',
+          style: 'greatHeader',
+          absolutePosition: { x: 40, y: 110 }
+        },
+        {
+          layout: 'lightHorizontalLines',
+          absolutePosition: { x: 100, y: 145 },
+          table: {
+            widths: [ 150, 100, 100 ],
+            body: [
+              [ 'Tipo de Medida', 'Núm. Comercios', 'Ahorro estimado'],
+              [ 'Iluminación LED', 5, '60%'],
+              [ 'Equipos climatización', 3, '15%'],
+              [ 'Buenas prácticas', 8, '12%'],
+            ]
+          }
+        },
+        {
+          text: 'Optimización de potencia contratada',
+          style: 'greatHeader',
+          absolutePosition: { x: 40, y: 260 }
+        },
+        {
+          text: resumen.optimizacion,
+          absolutePosition: { x: 40, y: 270 }
+        },
+        {
+          text: 'Evolución del consumo y potencia',
+          style: 'greatHeader',
+          absolutePosition: { x: 40, y: 420 }
+        },
+        {
+          text: resumen.evolucion,
+          absolutePosition: { x: 40, y: 450 }
+        },
+        {
+          text: 'Observaciones y opciones a futuro',
+          style: 'greatHeader',
+          absolutePosition: { x: 40, y: 590 }
+        },
+        {
+          text: resumen.observaciones,
+          absolutePosition: { x: 40, y: 620 }
+        },
+
+        { text: 'Letter Ingenieros SL',
+          style: 'mediumHeader',
+          absolutePosition: { x: 380, y: 790 }
+        }
+      ],
 
     ];
 
@@ -178,6 +221,9 @@ export class PdfInformeSemestralService {
           color: '#cb222b',
           margin: [0, 10, 0, 10],
           bold: true
+        },
+        fontBarraGris: {
+          fontSize: 11
         },
         fontTable: {
           fontSize: 10

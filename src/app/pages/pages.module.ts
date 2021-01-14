@@ -14,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     declarations: [
@@ -40,6 +41,7 @@ import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
         ComponentsModule,
         NgxGaugeModule,
         PipesModule,
+        NgbModule
     ],
     providers: [DatePipe, DecimalPipe],
 })
