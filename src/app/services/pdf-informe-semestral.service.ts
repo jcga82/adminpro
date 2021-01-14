@@ -120,8 +120,8 @@ export class PdfInformeSemestralService {
             },
             {
               image: dibujo,
-              fit: [210, 190],
-              absolutePosition: { x: 295, y: 595 }
+              fit: [260, 220],
+              absolutePosition: { x: 295, y: 550 }
             },
           ]
         ]
@@ -138,52 +138,53 @@ export class PdfInformeSemestralService {
         {
           text: 'Cuadro resumen de ahorros',
           style: 'greatHeader',
-          absolutePosition: { x: 40, y: 110 }
+          absolutePosition: { x: 50, y: 120 }
         },
         {
           layout: 'lightHorizontalLines',
-          absolutePosition: { x: 100, y: 145 },
+          absolutePosition: { x: 90, y: 165 },
           table: {
-            widths: [ 150, 100, 100 ],
+            widths: [ 180, 100, 100 ],
             body: [
               [ 'Tipo de Medida', 'Núm. Comercios', 'Ahorro estimado'],
-              [ 'Iluminación LED', 5, '60%'],
-              [ 'Equipos climatización', 3, '15%'],
-              [ 'Buenas prácticas', 8, '12%'],
+              [ 'Iluminación LED', 18, '13%'],
+              [ 'Optimizacvión de tarifa', 15, '7%'],
+              [ 'Compra agrupada de energía', 19, '26%'],
+              [ 'Buenas prácticas', 25, '20%'],
             ]
           }
         },
         {
           text: 'Optimización de potencia contratada',
           style: 'greatHeader',
-          absolutePosition: { x: 40, y: 260 }
+          absolutePosition: { x: 50, y: 290 }
         },
         {
           text: resumen.optimizacion,
-          absolutePosition: { x: 40, y: 270 }
+          absolutePosition: { x: 50, y: 315 }
         },
         {
           text: 'Evolución del consumo y potencia',
           style: 'greatHeader',
-          absolutePosition: { x: 40, y: 420 }
+          absolutePosition: { x: 50, y: 400 }
         },
         {
           text: resumen.evolucion,
-          absolutePosition: { x: 40, y: 450 }
+          absolutePosition: { x: 50, y: 430 }
         },
         {
           text: 'Observaciones y opciones a futuro',
           style: 'greatHeader',
-          absolutePosition: { x: 40, y: 590 }
+          absolutePosition: { x: 50, y: 500 }
         },
         {
           text: resumen.observaciones,
-          absolutePosition: { x: 40, y: 620 }
+          absolutePosition: { x: 50, y: 530 }
         },
 
         { text: 'Letter Ingenieros SL',
           style: 'mediumHeader',
-          absolutePosition: { x: 380, y: 790 }
+          absolutePosition: { x: 380, y: 780 }
         }
       ],
 
