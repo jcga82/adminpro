@@ -11,11 +11,11 @@ import { MultiDataSet, Label, Color} from 'ng2-charts';
 export class DonutsComponent implements OnInit {
 
   @Input() titulo: string = "Sin titulo";
-  @Input('labelDonuts') doughnutChartLabels: Label[] = ['Parte Vieja', 'Altza', 'Sancho El Sabio'];
-  @Input('dataDonuts') doughnutChartData: MultiDataSet = [[35, 28, 12, 1],];
+  @Input('labelDonuts') doughnutChartLabels: Label[] = ['Parte Vieja', 'Altza', 'Sancho El Sabio', 'Txomin'];
+  @Input('dataDonuts') doughnutChartData: MultiDataSet = [[0, 0, 0, 0],];
   
   public colors: Color[] = [
-    { backgroundColor: [ '#6857E6', '#009FEE', '#F02059' ]}
+    { backgroundColor: [ '#b8daba', '#009FEE', '#F02059', '#ffff00' ]}
   ];
   public doughnutChartType: ChartType = 'doughnut';
 

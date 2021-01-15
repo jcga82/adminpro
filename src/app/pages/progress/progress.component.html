@@ -15,7 +15,6 @@
     </div>
   </div>
 </div> -->
-<!-- <app-agrupada-tarifas-chart></app-agrupada-tarifas-chart> -->
 
 <div class="row">
     <div class="col-lg-3 col-md-6" *ngFor="let dato of datosBasicos">
@@ -60,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5 col-md-6">
+    <div class="col-lg-5 col-md-6" *ngIf="dataDonuts[0][0]>0">
         <app-donuts titulo="Barrios del proyecto" [labelDonuts]="labelsDonuts" [dataDonuts]="dataDonuts"></app-donuts>
       </div> 
     <div class="col-lg-4">
@@ -111,7 +110,12 @@
                       <h1 class="text-white"><i class="icon-cloud-download"></i></h1></div>
                   <div>
                       <h3 class="card-title text-white">Descarga asesorías</h3>
-                      <h6 class="card-subtitle text-white">Noviembre  2020</h6> </div>
+                      <div>
+                        <button (click)="generarInformeAsesorias()">
+                            <i class="fa fa-download"></i> Informe Enero 2021
+                        </button>
+                    </div>
+                </div>
               </div>
           </div>
       </div>
@@ -123,8 +127,13 @@
                 <div class="m-r-20 align-self-center">
                     <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
                 <div>
-                    <h3 class="card-title text-white">Último Seguimiento</h3>
-                    <h6 class="card-subtitle text-white">Abril  2020</h6> </div>
+                    <h3 class="card-title text-white">Compra Agrupada</h3>
+                    <div>
+                        <button (click)="generarInformeAgrupada()">
+                            <i class="fa fa-download"></i> Informe Enero 2021
+                        </button>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -237,12 +246,6 @@
                             <td>3.0A</td>
                             <td class="font-medium">0.0638 €/kWh</td>
                         </tr>
-                        <br>
-                        <div>
-                            <button (click)="generarInformeAgrupada()">
-                                <i class="fa fa-download"></i> Informe Agrupada Enero 2021
-                            </button>
-                        </div>
                     </tbody>
                 </table>
             </div>
@@ -410,6 +413,16 @@
     </div>
 </div>
 <div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tarifas agrupada</h4>
+                <app-agrupada-tarifas-chart></app-agrupada-tarifas-chart>
+            </div>
+        </div>
+    </div>
+</div> 
+<!-- <div class="row">
     <div class="col-lg-8">
         <div class="card">
             <div class="card-body">
@@ -453,7 +466,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

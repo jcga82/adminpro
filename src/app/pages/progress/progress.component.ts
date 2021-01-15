@@ -28,7 +28,7 @@ export class ProgressComponent implements OnInit, AfterViewInit {
     },{
       nombre: 'Viviendas',
       valor: 0,
-      icono: 'mdi mdi-star-circle',
+      icono: 'mdi mdi-home',
       color: 'css-bar-warning'
     },{
       nombre: 'Agrupada',
@@ -39,8 +39,8 @@ export class ProgressComponent implements OnInit, AfterViewInit {
   ];
 
   // Grafico Donuts
-  labelsDonuts: string[] = ['Parte Vieja', 'Altza', 'Sancho El Sabio'];
-  dataDonuts: any = [[35, 28, 12, 1],];
+  labelsDonuts: string[] = ['Parte Vieja', 'Altza', 'Sancho El Sabio', 'Txomin'];
+  dataDonuts: any = [[0, 0, 0, 1],];
 
   // Grafico Area
   dataArea: number[] = [20,40,40,60,80,50,60,40,80,60,60,80];
@@ -62,20 +62,20 @@ export class ProgressComponent implements OnInit, AfterViewInit {
     {
       icon: 'income',
       name: 'TOTAL',
-      quantity: 88 
+      quantity: 0 
     }, {
       icon: 'staff',
       name: 'VIVIENDAS',
-      quantity: 20 
+      quantity: 0 
 
     },{
       icon: 'assets',
       name: 'COMERCIOS',
-      quantity: 68 
+      quantity: 0 
     },{
       icon: 'expense',
       name: 'AGRUPADA',
-      quantity: 27 
+      quantity: 0 
     }
   ]
 
@@ -93,6 +93,25 @@ export class ProgressComponent implements OnInit, AfterViewInit {
     .subscribe((result: any) => {
       console.log(result);
       this.data = result.data.profiles;
+      // Grafica Donuts Zonas
+      const arrayZonaZaharra = this.data.filter( (data: any) => {
+        return (data.zona == 'Alde zaharra');
+      });
+      this.dataDonuts[0][0] = arrayZonaZaharra.length;
+      const arrayZonaAltza = this.data.filter( (data: any) => {
+        return (data.zona == 'Altza');
+      });
+      this.dataDonuts[0][1] = arrayZonaAltza.length;
+      const arrayZonaSancho = this.data.filter( (data: any) => {
+        return (data.zona != 'Alde zaharra' && data.zona != 'Altza');
+      });
+      this.dataDonuts[0][2] = arrayZonaSancho.length;
+      const arrayZonaOtros = this.data.filter( (data: any) => {
+        return (data.zona == 'Txomin');
+      });
+      this.dataDonuts[0][3] = arrayZonaOtros.length;
+
+      // Datos Básicos
       this.datosBasicos[0].valor = this.data.length;
       const arrayComercios = this.data.filter( (data: any) => {
         return (data.actividad != 'Vivienda');
