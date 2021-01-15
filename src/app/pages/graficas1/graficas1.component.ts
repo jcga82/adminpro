@@ -12,7 +12,11 @@ import { DecimalPipe } from '@angular/common';
 export class Graficas1Component implements OnInit {
 
   calidad: any = [];
-  valor = `${50}%`;
+  cargando = true;
+  fechaFin = new Date();
+  fechaInicioString = '';
+  fechaFinString = '';
+  
 
   constructor(
     private apollo: Apollo,
@@ -20,14 +24,19 @@ export class Graficas1Component implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.cargando = true;
+    this.fechaFinString = this.getFechaString(this.fechaFin);
+    const fechaInicio = new Date(this.fechaFin.setDate(this.fechaFin.getDate() - 30));
+    this.fechaInicioString = this.getFechaString(fechaInicio);
     this.apollo.watchQuery(
       { query: CalidadDatoTotal,
         variables: {
-          initDate: "2020-12-10",
-          endDate: "2021-01-09"
+          initDate: this.fechaInicioString,
+          endDate: this.fechaFinString
         } })
       .valueChanges.subscribe((result: any) => {
-        console.log(result.data.analisisEst);
+        console.log(result);
+        this.cargando = result.loading;
         result.data.analisisEst.forEach((element: any) => {
           this.calidad.push(
             {
@@ -44,10 +53,14 @@ export class Graficas1Component implements OnInit {
           );
         });
         console.log(this.calidad);
-        // this.calidad.numDias = result.data.analisis[0].numDias;
-        // this.calidad2020[0].porcentajeCorrecto = result.data.analisis[0].porcentajeCorrecto;
-        // this.calidad2020[0].totalEstimado = result.data.analisis[0].totalEstimado;
     });
+  }
+
+  getFechaString(fecha: Date){
+    let day = ("0" + fecha.getDate()).slice(-2);
+    let month = ("0" + (fecha.getMonth() + 1)).slice(-2);
+    let year = fecha.getFullYear()
+    return `${year}-${month}-${day}`;
   }
 
 }

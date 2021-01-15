@@ -1,33 +1,55 @@
-<h4 class="font-medium m-t-30">Calidad del dato - Últimos 30 días</h4>
-
-<!-- <h5 class="m-t-30"><b>Enero 2021 ({{ calidad.numDias }} d)</b> ({{ calidad.totalCorrecto + calidad.totalEstimado + calidad.totalFallo + calidad.totalNulo + calidad.totalZero }} días - {{ calidad.totalCorrecto }} son correctos) <span class="pull-right">{{ calidad.porcentajeCorrecto | number : '1.2-2' }} %</span></h5> -->
-
-<div *ngFor="let c of calidad">
-  <ng-template #popContent>
-    Fallos: <b>{{ c.totalFallo }}</b> días <br>
-    Nulos: <b>{{ c.totalNulo }}</b> días <br>
-    Ceros: <b>{{ c.totalZero }}</b> días <br>
-    Correctos: <b>{{ c.totalCorrecto }}</b> días <br>
-    Estimados: <b>{{ c.totalEstimado }} días</b>
-  </ng-template>
-  <div>
-    {{ c.nombrePerfil }} - {{ c.porcentajeCorrecto }} % correcto y {{ c.porcentajeEstimado }} % estimado.
-    <span type="button" 
-      class="badge badge-secondary"
-      placement="top"
-      [ngbPopover]="popContent" 
-      popoverTitle="Detalle datos">
-      Ver detalle
-  </span>
-  </div> 
-  <div class="progress">
-    <div class="progress-bar bg-success" 
-      role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" 
-      style="height:6px;"
-      [style.width]= "c.porcentajeCorrecto.concat('%')"> 
+<div class="row animated fadeIn fast" *ngIf="cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="alert alert-info text-center">
+          <h4 class="alert-heading">Cargando</h4>
+          <i class="fa fa-spin fa-refresh fa-2x"></i>
+          <p class="mb-0">Por favor espere... Calidad del dato - Últimos 30 días, desde {{ fechaInicioString }} hasta {{ fechaFinString }}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  </div>
-  <br>
 </div>
 
-<!-- <h5>[ Fallos: {{ calidad.totalFallo }} días - Nulos: {{ calidad.totalNulo }} días - Ceros: {{ calidad.totalZero }} días ] </h5> -->
+
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <h4 class="font-medium m-t-30">Calidad del dato - Últimos 30 días, desde {{ fechaInicioString }} hasta {{ fechaFinString }}</h4>
+          <!-- <h5 class="m-t-30"><b>Enero 2021 ({{ calidad.numDias }} d)</b> ({{ calidad.totalCorrecto + calidad.totalEstimado + calidad.totalFallo + calidad.totalNulo + calidad.totalZero }} días - {{ calidad.totalCorrecto }} son correctos) <span class="pull-right">{{ calidad.porcentajeCorrecto | number : '1.2-2' }} %</span></h5> -->
+          
+        <div *ngFor="let c of calidad">
+          <ng-template #popContent>
+            Fallos: <b>{{ c.totalFallo }}</b> días <br>
+            Nulos: <b>{{ c.totalNulo }}</b> días <br>
+            Ceros: <b>{{ c.totalZero }}</b> días <br>
+            Correctos: <b>{{ c.totalCorrecto }}</b> días <br>
+            Estimados: <b>{{ c.totalEstimado }} días</b>
+          </ng-template>
+          <div>
+            {{ c.nombrePerfil }} - {{ c.porcentajeCorrecto }} % correcto y {{ c.porcentajeEstimado }} % estimado.
+            <span type="button" 
+              class="badge badge-secondary"
+              placement="top"
+              [ngbPopover]="popContent" 
+              popoverTitle="Detalle datos">
+              Ver detalle
+          </span>
+          </div> 
+          <div class="progress">
+            <div class="progress-bar bg-success" 
+              role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" 
+              style="height:6px;"
+              [style.width]= "c.porcentajeCorrecto.concat('%')"> 
+          </div>
+          </div>
+          <br>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

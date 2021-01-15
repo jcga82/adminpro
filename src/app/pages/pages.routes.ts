@@ -16,7 +16,7 @@ const pagesRoutes: Routes = [
                 { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },
                 { path: 'progress', component: ProgressComponent, data: {titulo: 'Progreso'} },
                 { path: 'dashboard/perfil/:id', component: PerfilComponent, data: {titulo: 'Perfil'} },
-                { path: 'graficas1', component: Graficas1Component, data: {titulo: 'Gráficos'} },
+                { path: 'graficas1', component: Graficas1Component, data: {titulo: 'Calidad del dato'} },
                 { path: '', redirectTo: '/dashboard', pathMatch: 'full', data: {titulo: 'Dashboard'} },
             ]
     },
