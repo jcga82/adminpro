@@ -59,22 +59,30 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-5 col-md-6" *ngIf="dataDonuts[0][0]>0">
-        <app-donuts titulo="Barrios del proyecto" [labelDonuts]="labelsDonuts" [dataDonuts]="dataDonuts"></app-donuts>
-      </div> 
-    <div class="col-lg-4">
+    <div class="col-lg-9">
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Novedades</h4>
                 <ul class="feeds">
+                    <li *ngFor="let n of lastNotficaciones | sortBy:true"> 
+                        <span class="text-muted">
+                            {{ n.date }}
+                        </span>
+                        <div class="bg-light-info">
+                            <i class="fa fa-bell-o"></i>
+                        </div> 
+                        {{ n.usuario }} - {{ n.comentario }}
+                    </li>
                     <li>
-                        <div class="bg-light-info"><i class="fa fa-bell-o"></i></div> Informe de Agrupada <span class="text-muted">Ahora</span></li>
-                    <li>
+                        <a href="/notificaciones">Ver todas</a>
+                    </li>
+                    <!-- <li>
                         <div class="bg-light-success"><i class="ti-server"></i></div> Disponible informe<span class="text-muted">2 Hours ago</span></li>
                     <li>
                         <div class="bg-light-warning"><i class="ti-shopping-cart"></i></div> Nuevo comercio añadido<span class="text-muted">31 Dic</span></li>
                     <li>
-                        <div class="bg-light-danger"><i class="ti-user"></i></div> Nueva vivienda añadida<span class="text-muted">30 Dic</span></li>
+                        <div class="bg-light-danger"><i class="ti-user"></i></div> Nueva vivienda añadida<span class="text-muted">30 Dic</span>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -370,6 +378,15 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-body">
+                <div *ngIf="dataDonuts[0][0]>0">
+                    <app-donuts titulo="Barrios del proyecto" [labelDonuts]="labelsDonuts" [dataDonuts]="dataDonuts"></app-donuts>
+                </div>
+            </div> 
+        </div>
+    </div> 
 </div> 
 <!-- <div class="row">
     <div class="col-lg-8">

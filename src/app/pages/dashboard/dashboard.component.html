@@ -10,6 +10,17 @@
 
           <div class="row justify-content-center">
             <div>
+              <input class="form-check-input filled-in" type="checkbox" [(ngModel)]="comerciosOn" (change)="toggleComercios($event)" id="filledInCheckbox1">
+              <label for="filledInCheckbox1">Solo comercios</label>
+              &nbsp;
+              <input class="form-check-input filled-in" type="checkbox" [(ngModel)]="viviendasOn" (change)="toggleViviendas($event)" id="filledInCheckbox2">
+              <label for="filledInCheckbox1">Solo viviendas</label>
+            </div>
+            &nbsp;
+          </div>
+
+          <div class="row justify-content-center">
+            <div>
               <h6><input [(ngModel)]="textoBuscar" placeholder="Buscar usuario..."></h6>
             </div>
             &nbsp;
@@ -25,7 +36,7 @@
                 </select>
               </h6>
             </div>
-            &nbsp;
+            <!-- &nbsp;
             <div>
               <h6>
                 <select
@@ -37,18 +48,10 @@
                     [value]="actividad">{{actividad}}</option>
                 </select>
               </h6>
-            </div>
+            </div> -->
           </div>
 
           <!-- <div class="clear-selection" title="Click to Clear Selections" (click)="clearSelection()" *ngIf="selected_count">Clear Selection</div> -->
-
-          <div class="row justify-content-center">
-            <div>
-              <!-- <input type="checkbox" value="comerciosOn" (change)="toggleVisibility($event)"> -->
-              <input type="button" value="Filtra Comercios" (click)="toggleVisibility($event)">
-            </div>
-            &nbsp;
-          </div>
                                     
         <table id="example23" class="display nowrap table table-hover" cellspacing="0" width="100%">                 
             <thead>                          

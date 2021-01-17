@@ -14,6 +14,7 @@ import { CalidadDatoTotal } from 'src/assets/querys/querysGraphql';
 export class ProgressComponent implements OnInit, AfterViewInit {
 
   data: any[] = [];
+  lastNotficaciones: any;
   datosBasicos = [
     {
       nombre: 'Usuarios',
@@ -108,6 +109,22 @@ export class ProgressComponent implements OnInit, AfterViewInit {
     .subscribe((result: any) => {
       console.log(result);
       this.data = result.data.profiles;
+
+      // Datos Básicos
+      this.datosBasicos[0].valor = this.data.length;
+      const arrayComercios = this.data.filter( (data: any) => {
+        return (data.actividad != 'Vivienda');
+      });
+      this.datosBasicos[1].valor = arrayComercios.length;
+      const arrayViviendas = this.data.filter( (data: any) => {
+        return (data.actividad == 'Vivienda');
+      });
+      this.datosBasicos[2].valor = arrayViviendas.length;
+      const arrayAgrupada = this.data.filter( (data: any) => {
+        return data.esAgrupada;
+      });
+      this.datosBasicos[3].valor = arrayAgrupada.length;
+
       // Grafica Donuts Zonas
       const arrayZonaZaharra = this.data.filter( (data: any) => {
         return (data.zona == 'Alde zaharra');
@@ -126,22 +143,23 @@ export class ProgressComponent implements OnInit, AfterViewInit {
       });
       this.dataDonuts[0][3] = arrayZonaOtros.length;
 
-      // Datos Básicos
-      this.datosBasicos[0].valor = this.data.length;
-      const arrayComercios = this.data.filter( (data: any) => {
-        return (data.actividad != 'Vivienda');
+      // Ultimas notificaciones / comentarios
+      const array:any[] = [];
+      result.data.profiles
+          .map( (resultMap: any) => {
+            if (resultMap.comentarios.length > 0) {
+              resultMap.comentarios.forEach((comentario: any) => {
+                const objeto = {
+                  usuario: resultMap.usuario,
+                  date: comentario.date || null,
+                  comentario: comentario.comentario || null
+                }
+                array.push(objeto);
+              });
+              this.lastNotficaciones = array;// array.slice(Math.max(array.length - 5, 0));
+            }
+          });
       });
-      this.datosBasicos[1].valor = arrayComercios.length;
-      const arrayViviendas = this.data.filter( (data: any) => {
-        return (data.actividad == 'Vivienda');
-      });
-      this.datosBasicos[2].valor = arrayViviendas.length;
-      const arrayAgrupada = this.data.filter( (data: any) => {
-        return data.esAgrupada;
-      });
-      this.datosBasicos[3].valor = arrayAgrupada.length;
-
-    });
     
   }
 

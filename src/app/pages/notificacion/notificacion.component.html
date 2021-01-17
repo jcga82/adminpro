@@ -1,1 +1,47 @@
-<p>notificacion works!</p>
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Notificaciones</h4>
+          <h6 class="card-subtitle">Listado de notificaciones de la base de datos.</h6>
+          <div class="table-responsive m-t-40">      
+
+          <table id="example23" 
+            *ngIf="data"
+            class="display nowrap table table-hover" 
+            data-search="true"
+            cellspacing="0" 
+            width="100%">                 
+              <thead>                          
+                <tr>
+                  <th>Tipo</th>
+                  <th>Fecha</th>
+                  <th>Usuario</th>
+                  <th>Comentario</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let n of data | sortBy:false">
+                <tr>
+                  <td>
+                    <i class="fa fa-bell-o"></i>
+                  </td>
+                  <td>{{ n.date }}</td>
+                  <td>
+                    <a routerLink="{{'/dashboard/perfil/' + n.usuario}}">
+                      <b>{{ n.usuario }}</b>
+                    </a>
+                  </td>
+                  <td>
+                      {{ n.comentario }}
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  

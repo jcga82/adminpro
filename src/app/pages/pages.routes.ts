@@ -4,6 +4,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { Graficas1Component } from './graficas1/graficas1.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { NotificacionComponent } from './notificacion/notificacion.component';
 
 
 
@@ -17,6 +18,7 @@ const pagesRoutes: Routes = [
                 { path: 'progress', component: ProgressComponent, data: {titulo: 'Progreso'} },
                 { path: 'dashboard/perfil/:id', component: PerfilComponent, data: {titulo: 'Perfil'} },
                 { path: 'graficas1', component: Graficas1Component, data: {titulo: 'Calidad del dato'} },
+                { path: 'notificaciones', component: NotificacionComponent, data: {titulo: 'Notificaciones'} },
                 { path: '', redirectTo: '/dashboard', pathMatch: 'full', data: {titulo: 'Dashboard'} },
             ]
     },

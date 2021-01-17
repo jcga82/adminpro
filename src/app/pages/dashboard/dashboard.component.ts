@@ -1,29 +1,27 @@
-import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { CalidadDatoTotal } from 'src/assets/querys/querysGraphql';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styles: []
 })
-export class DashboardComponent implements OnInit, AfterContentInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
 
   data: any[] = [];
   textoBuscar = '';
   zonaComercio = '';
   tipoComercio = '';
   comerciosOn = true;
-  viviendasOn = false;
+  viviendasOn = true;
   calidadPorMes: any[] = [];
 
   zonas = ['Alde Zaharra', 'Altza', 'Sancho el Sabio', 'Otros'];
   actividades = ['', 'Alimentacion', ];
 
   constructor(
-    private usuariosServices: UsuariosService,
-    private apollo: Apollo,
+    private usuariosServices: UsuariosService
   ) { }
 
   ngOnInit() {
@@ -35,44 +33,18 @@ export class DashboardComponent implements OnInit, AfterContentInit {
     // this.getCalidadDatoPorMes();
   }
 
-  toggleVisibility(e: any){
+  toggleComercios(e: any){
+    console.log(e.target.checked);
     this.comerciosOn = e.target.checked;
   }
 
-  ngAfterContentInit() {
-    this.apollo.watchQuery(
-      { query: CalidadDatoTotal,
-        variables: {
-          initDate: '2020-12-01',
-          endDate: '2020-12-31'
-        } })
-      .valueChanges.subscribe((result: any) => {
-        const analisis = result.data.analisisEst;
-        const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
-        localStorage.setItem('Diciembre', JSON.stringify(media));
-      });
-    this.apollo.watchQuery(
-        { query: CalidadDatoTotal,
-          variables: {
-            initDate: '2020-11-01',
-            endDate: '2020-11-30'
-          } })
-        .valueChanges.subscribe((result: any) => {
-          const analisis = result.data.analisisEst;
-          const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
-          localStorage.setItem('Noviembre', JSON.stringify(media));
-        });
-    //   this.apollo.watchQuery(
-    //       { query: CalidadDatoTotal,
-    //         variables: {
-    //           initDate: '2020-10-01',
-    //           endDate: '2020-10-31'
-    //         } })
-    //       .valueChanges.subscribe((result: any) => {
-    //         const analisis = result.data.analisisEst;
-    //         const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
-    //         localStorage.setItem('Octubre', JSON.stringify(media));
-    //       });
+  toggleViviendas(e: any){
+    console.log(e.target.checked);
+    this.viviendasOn = e.target.checked;
+  }
+
+  ngAfterViewInit() {
+    
   }
 
 }

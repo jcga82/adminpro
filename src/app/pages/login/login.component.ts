@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Apollo } from 'apollo-angular';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import Swal from 'sweetalert2';
+import { CalidadDatoTotal } from 'src/assets/querys/querysGraphql';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     public usuarioService: UsuariosService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private apollo: Apollo,
   ) { }
 
   ngOnInit() { 
@@ -34,6 +37,42 @@ export class LoginComponent implements OnInit {
       }, (err) => {
         Swal.fire('Error', 'usuario o clave no válidos ' + err.error.msg, 'error');
       });
+  }
+
+  ngOnDestroy() {
+    this.apollo.watchQuery(
+      { query: CalidadDatoTotal,
+        variables: {
+          initDate: '2020-12-01',
+          endDate: '2020-12-31'
+        } })
+      .valueChanges.subscribe((result: any) => {
+        const analisis = result.data.analisisEst;
+        const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
+        localStorage.setItem('Diciembre', JSON.stringify(media));
+      });
+    this.apollo.watchQuery(
+        { query: CalidadDatoTotal,
+          variables: {
+            initDate: '2020-11-01',
+            endDate: '2020-11-30'
+          } })
+        .valueChanges.subscribe((result: any) => {
+          const analisis = result.data.analisisEst;
+          const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
+          localStorage.setItem('Noviembre', JSON.stringify(media));
+        });
+    //   this.apollo.watchQuery(
+    //       { query: CalidadDatoTotal,
+    //         variables: {
+    //           initDate: '2020-10-01',
+    //           endDate: '2020-10-31'
+    //         } })
+    //       .valueChanges.subscribe((result: any) => {
+    //         const analisis = result.data.analisisEst;
+    //         const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
+    //         localStorage.setItem('Octubre', JSON.stringify(media));
+    //       });
   }
 
 }
