@@ -21,6 +21,11 @@
         <h4 class="font-medium m-t-30">Calidad del dato - Últimos 30 días, desde {{ fechaInicioString }} hasta {{ fechaFinString }}</h4>
           <!-- <h5 class="m-t-30"><b>Enero 2021 ({{ calidad.numDias }} d)</b> ({{ calidad.totalCorrecto + calidad.totalEstimado + calidad.totalFallo + calidad.totalNulo + calidad.totalZero }} días - {{ calidad.totalCorrecto }} son correctos) <span class="pull-right">{{ calidad.porcentajeCorrecto | number : '1.2-2' }} %</span></h5> -->
           
+        <select name="miselect" (change)="onRangoChange()">
+          <option [value]="item" *ngFor="let item of lista" [ngValue]="item" [selected]="item">{{item}}</option>
+        </select>
+        <h4>Promedio periodo seleccionado: {{ promedio }} % con {{ total }} suministros.</h4>
+        <br>
         <div *ngFor="let c of calidad">
           <ng-template #popContent>
             Fallos: <b>{{ c.totalFallo }}</b> días <br>
@@ -32,7 +37,7 @@
           <div>
             {{ c.nombrePerfil }} - {{ c.porcentajeCorrecto }} % correcto y {{ c.porcentajeEstimado }} % estimado.
             <span type="button" 
-              class="badge badge-secondary"
+              class="badge badge-primary"
               placement="top"
               [ngbPopover]="popContent" 
               popoverTitle="Detalle datos">

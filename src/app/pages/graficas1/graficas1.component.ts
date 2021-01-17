@@ -12,10 +12,14 @@ import { DecimalPipe } from '@angular/common';
 export class Graficas1Component implements OnInit {
 
   calidad: any = [];
+  promedio: any;
+  total: any;
   cargando = true;
   fechaFin = new Date();
   fechaInicioString = '';
   fechaFinString = '';
+  lista:string[]=["No disponible", "Últimos 30 días"];
+  rango = true;
   
 
   constructor(
@@ -36,24 +40,32 @@ export class Graficas1Component implements OnInit {
         } })
       .valueChanges.subscribe((result: any) => {
         console.log(result);
+        this.total = result.data.analisisEst.lenght;
         this.cargando = result.loading;
         result.data.analisisEst.forEach((element: any) => {
-          this.calidad.push(
-            {
-              nombrePerfil: element.nombrePerfil,
-              numDias: element.numDias,
-              porcentajeCorrecto: this.decimalPipe.transform(element.porcentajeCorrecto, '1.2-2'),
-              porcentajeEstimado: this.decimalPipe.transform(element.porcentajeEstimado, '1.2-2'),
-              totalCorrecto: element.totalCorrecto,
-              totalEstimado: element.totalEstimado,
-              totalFallo: element.totalFallo,
-              totalNulo: element.totalNulo,
-              totalZero: element.totalZero
-            }
-          );
+          const objeto = {
+            nombrePerfil: element.nombrePerfil,
+            numDias: element.numDias,
+            porcentajeCorrecto: this.decimalPipe.transform(element.porcentajeCorrecto, '1.2-2'),
+            porcentajeEstimado: this.decimalPipe.transform(element.porcentajeEstimado, '1.2-2'),
+            totalCorrecto: element.totalCorrecto,
+            totalEstimado: element.totalEstimado,
+            totalFallo: element.totalFallo,
+            totalNulo: element.totalNulo,
+            totalZero: element.totalZero
+          }
+          this.calidad.push(objeto);
         });
-        console.log(this.calidad);
+        this.total = Object.keys(this.calidad).length;
+        const media = this.calidad.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(this.calidad).length;
+        this.promedio = this.decimalPipe.transform(media, '1.2-2')
+        localStorage.setItem('Enero', JSON.stringify(media));
+        console.log(this.promedio);
     });
+  }
+
+  onRangoChange() {
+    console.log('Cambió el rango seleccionado');
   }
 
   getFechaString(fecha: Date){

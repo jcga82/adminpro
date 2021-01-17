@@ -121,10 +121,14 @@
                         Esto supone un {{ consumo2020/consumo2019*100 | number : '1.0-0' }}% del consumo 2019
                         <h4 class="font-medium m-t-30">Consumos</h4>
                         <hr>
-                        <app-grafico-consumo titulo="Consumo mensual" label="Mes" [data]="data"></app-grafico-consumo>
+                        <app-grafico-consumo titulo="Últimos consumos" label="Fecha" [data]="data"></app-grafico-consumo>
                         <br>
+                        <!-- <hr> -->
+                        <!-- <app-grafico-consumo titulo="Consumo mensual" label="Mes" [data]="data"></app-grafico-consumo> -->
+                        <!-- <br> -->
                     </div>
                     <div class="card-body">
+                        <h5 class="font-medium m-t-30">Consumos Anuales</h5>
                         <app-kalea-consumos-chart *ngIf="consumo2019!=0" [consumo19]="consumo2019" [consumo20]="consumo2020"></app-kalea-consumos-chart>
                     </div>
                 </div>

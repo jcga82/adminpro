@@ -26,16 +26,15 @@ export class GraficoConsumoComponent implements OnInit {
         text: "Fecha"
       },
       // tickPositions: []
-      startOnTick: false,
-      endOnTick: false,
-      showLastLabel: true,
-      showFirstLabel: true,
+      // startOnTick: false,
+      // endOnTick: false,
+      // showLastLabel: true,
+      // showFirstLabel: true,
       labels: {
-        format: '{value:%e-%m-%y}'
-        // formatter: function() {
-        //   return Highcharts.dateFormat('dd/mm/YY', this.value);
-        // }
-      }
+        formatter: function() {
+          return Highcharts.dateFormat('%e-%m-%y',this.value);
+        }
+      },
     },
     yAxis: {
       endOnTick: false,
@@ -67,6 +66,8 @@ export class GraficoConsumoComponent implements OnInit {
         name: 'Consumo',
         color: '#FF6600',
         pointWidth: 15,
+        pointStart: Date.UTC(2021, 0, 1), 
+        pointInterval: 3600 * 1000 * 24,
         data: datos,
         type: 'column'
       }

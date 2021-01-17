@@ -43,12 +43,12 @@ export class ProgressComponent implements OnInit, AfterViewInit {
   dataDonuts: any = [[0, 0, 0, 1],];
 
   // Grafico Area
-  dataArea: number[] = [20,40,40,60,80,50,60,40,80,60,60,80];
+  dataArea: any[] = [0,0,0,0,0,0,0,0,0,0,0,0];
 
   // Gauge Calidad del dato
   gaugeType = "full";
   gaugeCap = "round";
-  gaugeValue = 48.3;
+  gaugeValue = 0;
   gaugeLabel = "Calidad";
   gaugeAppendText = "%";
   thresholdConfig = {
@@ -88,6 +88,21 @@ export class ProgressComponent implements OnInit, AfterViewInit {
   ) { }
 
   async ngOnInit() {
+
+    this.dataArea[0] = ['Enero', Number(localStorage.getItem('Enero')) || 0];;
+    this.dataArea[1] = ['Febrero', Number(localStorage.getItem('Febrero')) || 0];;
+    this.dataArea[2] = ['Marzo', Number(localStorage.getItem('Marzo')) || 0];;
+    this.dataArea[3] = ['Abril', Number(localStorage.getItem('Abril')) || 0];;
+    this.dataArea[4] = ['Mayo', Number(localStorage.getItem('Mayo')) || 0];;
+    this.dataArea[5] = ['Junio', Number(localStorage.getItem('Junio')) || 0];;
+    this.dataArea[6] = ['Julio', Number(localStorage.getItem('Julio')) || 0];;
+    this.dataArea[7] = ['Agosto', Number(localStorage.getItem('Agosto')) || 0];;
+    this.dataArea[8] = ['Septiembre', Number(localStorage.getItem('Septiembre')) || 0];;
+    this.dataArea[9] = ['Octubre', Number(localStorage.getItem('Octubre')) || 0];;
+    this.dataArea[10] = ['Noviembre', Number(localStorage.getItem('Noviembre')) || 0];
+    this.dataArea[11] = ['Diciembre', Number(localStorage.getItem('Diciembre')) || 0];
+
+    this.gaugeValue = Math.round(Number(localStorage.getItem('Enero'))) || 0;
 
     await this.usuariosServices.cargarPerfiles()
     .subscribe((result: any) => {

@@ -23,14 +23,14 @@ export class GraficoAreaComponent implements OnInit {
     },
     xAxis: {
       labels: {
-        enabled: true
+        formatter: function() {
+          return Highcharts.dateFormat('%b \'%y',this.value);
+        }
       },
       title: {
         text: "Mes"
       },
-      startOnTick: false,
-      endOnTick: false,
-      tickPositions: []
+      type: 'datetime', 
     },
     yAxis: {
       endOnTick: false,
@@ -39,7 +39,7 @@ export class GraficoAreaComponent implements OnInit {
         enabled: false
       },
       title: {
-        text: null
+        text: "% calidad"
       },
       tickPositions: [0]
     },
@@ -52,10 +52,13 @@ export class GraficoAreaComponent implements OnInit {
 
   ngOnInit(): void {
     this.chartOptions.series = [{
+      name: '% Correcto',
       data: this.data,
+      pointStart: Date.UTC(2020, 0, 1), 
+      pointInterval: 3600 * 1000 * 24 * 30,
       type: 'area'
     }];
-  
+
   }
 
 }
