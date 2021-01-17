@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login/login.component';
+import { NotificacionComponent } from './notificacion/notificacion.component';
 
 @NgModule({
     declarations: [
@@ -22,7 +24,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
         ProgressComponent,
         Graficas1Component,
         PagesComponent,
-        PerfilComponent
+        PerfilComponent,
+        LoginComponent,
+        NotificacionComponent
     ],
     exports: [
         DashboardComponent,

@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { Comentario, MejoraPropuesta, RespuestaGetMyData, Usuario } from '../interfaces/interfaces';
 import Swal from 'sweetalert2'
 import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 const URL = environment.url;
 
@@ -17,6 +18,7 @@ const URL = environment.url;
 export class UsuariosService {
 
   token: any = '';
+  tokenKE = '';
   dataPotencias: any;
   respuestaGetMyData: RespuestaGetMyData = {};
 
@@ -24,10 +26,11 @@ export class UsuariosService {
     private http: HttpClient,
     private apollo: Apollo,
     private datePipe: DatePipe,
+    private router: Router
   ) { }
 
 
-  login( username: string, password: string ){
+  loginKE( username: string, password: string ){
 
     const body = {
         username,
@@ -40,8 +43,8 @@ export class UsuariosService {
         .subscribe((resp: any) => {
           console.log(resp);
     
-          resp.token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZTgxOTRiZTYzODI5ODA0ZjA0MWUxNGUiLCJuYW1lIjoiYWRtaW4iLCJtYWlsIjoiYWRtaW5AbGV0dGVyLmVzIiwibGV2ZWwiOiJBRE1JTiIsImV4cCI6MTYwOTQ5MzMyM30.AbWOn3pOik11ftYYoog00jr0vcAgsWbFfqQpYAm1gWQ";
-          this.guardarToken(resp.token);
+          // resp.token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZTgxOTRiZTYzODI5ODA0ZjA0MWUxNGUiLCJuYW1lIjoiYWRtaW4iLCJtYWlsIjoiYWRtaW5AbGV0dGVyLmVzIiwibGV2ZWwiOiJBRE1JTiIsImV4cCI6MTYwOTQ5MzMyM30.AbWOn3pOik11ftYYoog00jr0vcAgsWbFfqQpYAm1gWQ";
+          this.guardarTokenKE(resp.token);
           resolve(true);
         }, (err: HttpErrorResponse) => {
           console.log(err);
@@ -53,9 +56,17 @@ export class UsuariosService {
     });
   }
 
+  login( username: string, password: string ){
+    const body = {
+      'username': username,
+      'password': password
+    };
+    return this.http.post('https://gesletter.es:7388/api/v1/login', body)
+  }
+
   logout() {
     localStorage.clear();
-    // this.navCrtl.navigateRoot('/login', {animated: true});
+    this.router.navigateByUrl('/login');
   }
 
   registro( username: string, password: string ){
@@ -76,6 +87,11 @@ export class UsuariosService {
   async guardarToken( token: string) {
     this.token = token;
     await localStorage.setItem('token', token);
+  }
+
+  async guardarTokenKE( tokenKE: string) {
+    this.tokenKE = tokenKE;
+    await localStorage.setItem('tokenKE', tokenKE);
   }
 
   async cargarToken() {
@@ -127,7 +143,7 @@ export class UsuariosService {
 
   getDataConsumos(user: string, contrato: string) {
       const headers = {headers: {
-        'Authorization': 'JWT ' + this.token,
+        'Authorization': 'JWT ' + this.tokenKE,
         'Content-Type': 'application/json'
       }};
       const granularity = 'Days';
@@ -149,7 +165,7 @@ export class UsuariosService {
 
   getDataPotencias(user: string, contrato: string) {
       const headers = {headers: {
-        'Authorization': 'JWT ' + this.token,
+        'Authorization': 'JWT ' + this.tokenKE,
         'Content-Type': 'application/json'
       }};
       const fromDate = '1530529200';

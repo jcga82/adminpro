@@ -62,17 +62,17 @@ export class DashboardComponent implements OnInit, AfterContentInit {
           const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
           localStorage.setItem('Noviembre', JSON.stringify(media));
         });
-      this.apollo.watchQuery(
-          { query: CalidadDatoTotal,
-            variables: {
-              initDate: '2020-10-01',
-              endDate: '2020-10-31'
-            } })
-          .valueChanges.subscribe((result: any) => {
-            const analisis = result.data.analisisEst;
-            const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
-            localStorage.setItem('Octubre', JSON.stringify(media));
-          });
+    //   this.apollo.watchQuery(
+    //       { query: CalidadDatoTotal,
+    //         variables: {
+    //           initDate: '2020-10-01',
+    //           endDate: '2020-10-31'
+    //         } })
+    //       .valueChanges.subscribe((result: any) => {
+    //         const analisis = result.data.analisisEst;
+    //         const media = analisis.reduce( (total: any, next: any ) => total + Number(next.porcentajeCorrecto), 0) / Object.keys(analisis).length;
+    //         localStorage.setItem('Octubre', JSON.stringify(media));
+    //       });
   }
 
 }

@@ -23,9 +23,8 @@ export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
           operation.setContext({
             headers: new HttpHeaders().set(
               'Authorization',
-              // `Bearer ${localStorage.getItem('token') || null}`,
-              'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZTgxOTRiZTYzODI5ODA0ZjA0MWUxNGUiLCJuYW1lIjoiYWRtaW4iLCJtYWlsIjoiYWRtaW5AbGV0dGVyLmVzIiwibGV2ZWwiOiJBRE1JTiIsImV4cCI6MTYxMDg3MTA4N30.cfMX7vx8Iaf8qNfd3Tr7s-P1VgjqL8oFxXPWVOKkkT4'
-            ),
+              `Bearer ${localStorage.getItem('token') || null}`,
+              ),
           });
           return forward(operation);
         });
