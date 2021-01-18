@@ -41,15 +41,22 @@ export class ConsumosService {
 
 getDataPotencias(user: string, contrato: string) {
     const headers = {headers: {
-      'Authorization': 'JWT ' + this.token,
+      'Authorization': 'JWT ' + localStorage.getItem('tokenKE'),
       'Content-Type': 'application/json'
     }};
-    const fromDate = '1530529200';
-    const toDate = '1606777199.999';
-    const toDate2 = Date.now();
-    const fromDate2 = toDate2 - (1000 * 60 * 60 * 24 * 365);
+    const toDate = Date.now();
+    const fromDate = toDate - (1000 * 60 * 60 * 24 * 30 * 5);
 
-    return this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate2/1000 + '&endDate=' + toDate2/1000 + '&granularity=Months' + '&contrato_id=' + contrato + '&as_user=' + user, headers);
+    return this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate/1000 + '&endDate=' + toDate/1000 + '&granularity=Months' + '&contrato_id=' + contrato + '&as_user=' + user, headers);
+}
+
+getDataMensual(user: string) {
+  const headers = {headers: {
+    'Authorization': 'JWT ' + localStorage.getItem('tokenKE'),
+    'Content-Type': 'application/json'
+  }};
+
+  return this.http.get(URL + '/appapi/user_monthly_data.json?as_user=' + user, headers);
 }
 
 }

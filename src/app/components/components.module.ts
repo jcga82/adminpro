@@ -11,6 +11,8 @@ import { AgrupadaTarifasChartComponent } from './agrupada-tarifas-chart/agrupada
 import { ComentarioComponent } from './comentario/comentario.component';
 import { FormsModule } from '@angular/forms';
 import { MejoraComponent } from './mejora/mejora.component';
+import { GraficoPotenciaComponent } from './grafico-potencia/grafico-potencia.component';
+import { GraficoMensualComponent } from './grafico-mensual/grafico-mensual.component';
 
 
 @NgModule({
@@ -18,6 +20,8 @@ import { MejoraComponent } from './mejora/mejora.component';
     DonutsComponent, 
     GraficoAreaComponent, 
     GraficoConsumoComponent, 
+    GraficoPotenciaComponent,
+    GraficoMensualComponent,
     KaleaConsumosChartComponent,
     AgrupadaTarifasChartComponent,
     ComentarioComponent,
@@ -27,6 +31,8 @@ import { MejoraComponent } from './mejora/mejora.component';
     DonutsComponent,
     GraficoAreaComponent,
     GraficoConsumoComponent,
+    GraficoPotenciaComponent,
+    GraficoMensualComponent,
     KaleaConsumosChartComponent,
     AgrupadaTarifasChartComponent,
     ComentarioComponent,

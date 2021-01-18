@@ -163,18 +163,18 @@ export class UsuariosService {
         + granularity + '&contrato_id=' + contrato + '&var_type=Consumo&as_user=' + user, headers);
   }
 
-  getDataPotencias(user: string, contrato: string) {
-      const headers = {headers: {
-        'Authorization': 'JWT ' + this.tokenKE,
-        'Content-Type': 'application/json'
-      }};
-      const fromDate = '1530529200';
-      const toDate = '1606777199.999';
-      const toDate2 = Date.now();
-      const fromDate2 = toDate2 - (1000 * 60 * 60 * 24 * 365);
+  // getDataPotencias(user: string, contrato: string) {
+  //     const headers = {headers: {
+  //       'Authorization': 'JWT ' + this.tokenKE,
+  //       'Content-Type': 'application/json'
+  //     }};
+  //     const fromDate = '1530529200';
+  //     const toDate = '1606777199.999';
+  //     const toDate2 = Date.now();
+  //     const fromDate2 = toDate2 - (1000 * 60 * 60 * 24 * 365);
 
-      return this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate2/1000 + '&endDate=' + toDate2/1000 + '&granularity=Months' + '&contrato_id=' + contrato + '&as_user=' + user, headers);
-  }
+  //     return this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate2/1000 + '&endDate=' + toDate2/1000 + '&granularity=Months' + '&contrato_id=' + contrato + '&as_user=' + user, headers);
+  // }
 
   public cargarPerfiles() {
     return this.apollo.watchQuery({ query: Users })

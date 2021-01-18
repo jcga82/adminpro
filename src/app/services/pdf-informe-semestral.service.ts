@@ -63,40 +63,40 @@ export class PdfInformeSemestralService {
               text: resumen.comercios,
               margin: [0, 0, 0, 0],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 225 }
+              absolutePosition: { x: 40, y: 220 }
             },
             {
               text: 'Compra Agrupada',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 390 }
+              absolutePosition: { x: 40, y: 385 }
             },
             {
               text: resumen.agrupada,
               margin: [0, 0, 0, 0],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 415 }
+              absolutePosition: { x: 40, y: 410 }
             },
             {
               text: 'Consumo anual medio',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 555 }
+              absolutePosition: { x: 40, y: 570 }
             },
             {
               text: resumen.consumo,
               margin: [0, 0, 0, 0],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 585 }
+              absolutePosition: { x: 40, y: 595 }
             },
             {
               text: 'Tarifa Contratada',
               style: 'mediumHeader',
-              absolutePosition: { x: 40, y: 620 }
+              absolutePosition: { x: 40, y: 640 }
             },
             {
               text: [
               { text: resumen.tarifas }],
               style: 'fontBarraGris',
-              absolutePosition: { x: 40, y: 650 }
+              absolutePosition: { x: 40, y: 665 }
             },
             {
               text: 'Eficiencia Energética',
@@ -106,6 +106,7 @@ export class PdfInformeSemestralService {
             {
               text: [
               { text: resumen.intro }],
+              alignment: 'justify',
               absolutePosition: { x: 240, y: 280 }
             },
             {
@@ -116,6 +117,7 @@ export class PdfInformeSemestralService {
             {
               text: [
               { text: resumen.medidas }],
+              alignment: 'justify',
               absolutePosition: { x: 240, y: 410 }
             },
             {
@@ -136,9 +138,14 @@ export class PdfInformeSemestralService {
 
       [
         {
-          text: 'Cuadro resumen de ahorros',
+          text: 'Cuadro resumen de ahorros económicos',
           style: 'greatHeader',
           absolutePosition: { x: 50, y: 120 }
+        },
+        {
+          text: 'Los ahorros mostrados en la tabla se refieren a los valores de ahorro promedio que se obtendrán de la aplicación de cada una de las medidas detalladas en la tabla, no siendo estos valores acumulables en todos los comercios. Se estima una reducción de un 45% del gasto económico total, calculado en caso de llevar a cabo todas las medidas propuestas en los diversos comercios.',
+          alignment: 'justify',
+          absolutePosition: { x: 50, y: 275 }
         },
         {
           layout: 'lightHorizontalLines',
@@ -150,36 +157,39 @@ export class PdfInformeSemestralService {
               [ 'Iluminación LED', 18, '13%'],
               [ 'Optimización de tarifa', 15, '7%'],
               [ 'Compra agrupada de energía', 19, '26%'],
-              [ 'Buenas prácticas', 25, '20%'],
+              [ 'Buenas prácticas', 25, '14%'],
             ]
           }
         },
         {
           text: 'Optimización de potencia contratada',
           style: 'greatHeader',
-          absolutePosition: { x: 50, y: 290 }
+          absolutePosition: { x: 50, y: 360 }
         },
         {
           text: resumen.optimizacion,
-          absolutePosition: { x: 50, y: 315 }
+          alignment: 'justify',
+          absolutePosition: { x: 50, y: 385 }
         },
         {
-          text: 'Evolución del consumo y potencia',
+          text: 'Evolución del consumo',
           style: 'greatHeader',
-          absolutePosition: { x: 50, y: 400 }
+          absolutePosition: { x: 50, y: 450 }
         },
         {
           text: resumen.evolucion,
-          absolutePosition: { x: 50, y: 430 }
+          alignment: 'justify',
+          absolutePosition: { x: 50, y: 480 }
         },
         {
           text: 'Observaciones y opciones a futuro',
           style: 'greatHeader',
-          absolutePosition: { x: 50, y: 500 }
+          absolutePosition: { x: 50, y: 550 }
         },
         {
           text: resumen.observaciones,
-          absolutePosition: { x: 50, y: 530 }
+          alignment: 'justify',
+          absolutePosition: { x: 50, y: 580 }
         },
 
         { text: 'Letter Ingenieros SL',

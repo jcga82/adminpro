@@ -4,7 +4,7 @@ import * as Highcharts from 'highcharts';
 @Component({
   selector: 'app-grafico-consumo',
   templateUrl: './grafico-consumo.component.html',
-  styleUrls: ['./grafico-consumo.component.scss']
+  styleUrls: []
 })
 export class GraficoConsumoComponent implements OnInit {
 
@@ -55,18 +55,18 @@ export class GraficoConsumoComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data);
+    //console.log(this.data);
     const datos: any = [];
     this.data.forEach((element: any) => {
       datos.push([element.timestamp, element.value0])
     });
-    console.log(datos);
+    //console.log(datos);
     this.chartOptions.series = [
       {
         name: 'Consumo',
         color: '#FF6600',
         pointWidth: 15,
-        pointStart: Date.UTC(2021, 0, 1), 
+        pointStart: Date.now() - (1000 * 60 * 60 * 24 * 30),
         pointInterval: 3600 * 1000 * 24,
         data: datos,
         type: 'column'

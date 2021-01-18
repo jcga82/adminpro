@@ -34,12 +34,11 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   toggleComercios(e: any){
-    console.log(e.target.checked);
+    // console.log(e.target.checked);
     this.comerciosOn = e.target.checked;
   }
 
   toggleViviendas(e: any){
-    console.log(e.target.checked);
     this.viviendasOn = e.target.checked;
   }
 

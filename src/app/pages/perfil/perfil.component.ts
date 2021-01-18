@@ -65,6 +65,9 @@ export class PerfilComponent implements OnInit, AfterViewInit {
 
   dataArea: number[] = [20,40,40,60,80,50,60,40,80,60,60,80];
   data: any;
+  dataConsumoMes: any;
+  dataPotencia: any;
+  dataMes: any;
 
   public updateForm = this.fb.group({
     identifier: [''],
@@ -231,7 +234,20 @@ export class PerfilComponent implements OnInit, AfterViewInit {
                   console.log(result);
                   this.data = result.items;
                 });
-            });
+          });
+          // Pilo los valores mensuales
+          this.consumosService.getDataMensual(this.usuarioId)
+            .subscribe((result: any) => {
+              console.log('mensual', result.me);
+              this.dataMes = result.me;
+          });
+          // Pido los valores de potencia máxima
+          const cups = this.usuario.tipoCuenta === 'Efergy' ? 'source_efergy' : this.cups;
+          this.consumosService.getDataPotencias(this.usuarioId, cups)
+            .subscribe((result: any) => {
+              console.log(result);
+              this.dataPotencia = result.items;
+          });
 
         });
     });

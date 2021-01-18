@@ -123,9 +123,12 @@
                         <hr>
                         <app-grafico-consumo titulo="Últimos consumos" label="Fecha" [data]="data"></app-grafico-consumo>
                         <br>
-                        <!-- <hr> -->
-                        <!-- <app-grafico-consumo titulo="Consumo mensual" label="Mes" [data]="data"></app-grafico-consumo> -->
-                        <!-- <br> -->
+                        <hr>
+                        <app-grafico-mensual *ngIf="dataMes" titulo="Consumo mensual" label="Mes" [data]="dataMes"></app-grafico-mensual>
+                        <br>
+                        <hr>
+                        <app-grafico-potencia titulo="Potencia Máxima" label="Mes" [data]="dataPotencia"></app-grafico-potencia>
+                        <br>
                     </div>
                     <div class="card-body">
                         <h5 class="font-medium m-t-30">Consumos Anuales</h5>
