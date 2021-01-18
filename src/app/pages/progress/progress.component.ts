@@ -156,7 +156,7 @@ export class ProgressComponent implements OnInit, AfterViewInit {
                 }
                 array.push(objeto);
               });
-              this.lastNotficaciones = array;// array.slice(Math.max(array.length - 5, 0));
+              this.lastNotficaciones = array;
             }
           });
       });
