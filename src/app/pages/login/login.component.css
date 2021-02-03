@@ -73,3 +73,24 @@ Login register and recover password Page
     position: absolute;
     height: 100%;
 }
+
+.myInput
+  {
+      width: 220px;
+      padding: 10px;
+      padding-left: 40px;
+      border-radius: 25px;
+      background-image: linear-gradient(to right, #0084ff, #00f2ff);
+      color: #fff;
+      border: none;
+      display: block;
+  }
+
+  .fas
+  {
+      position: relative;
+      display: block;
+      left: -87px;
+      top: 30px;
+      color: rgb(255, 255, 255);
+  }

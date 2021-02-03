@@ -7,6 +7,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { RouterModule } from '@angular/router';
 import { PipesModule } from '../pipes/pipes.module';
 import { CommonModule } from '@angular/common';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { CommonModule } from '@angular/common';
     imports: [
         CommonModule,
         RouterModule,
-        PipesModule
+        PipesModule,
+        NgbModule
     ],
 })
 

@@ -19,6 +19,7 @@ export class Graficas1Component implements OnInit {
   fechaInicioString = '';
   fechaFinString = '';
   lista:string[]=["No disponible", "Últimos 30 días"];
+  listaBarrios:string[]=["Alde Zaharra", "Altza"];
   rango = true;
   
 

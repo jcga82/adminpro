@@ -9,11 +9,12 @@ import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './shared/nopagefound/nopagefound.component';
 import { LoginComponent } from './pages/login/login.component';
+import { LandingComponent } from './pages/landing/landing.component';
 
 const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: LoginComponent },
+  { path: 'register', component: LandingComponent },
   { path: '**', component: NopagefoundComponent },
 ];
 

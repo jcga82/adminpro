@@ -1,0 +1,341 @@
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+  <!-- Full Page Intro -->
+  <div class="view full-page-intro" 
+    style="background-image: url('../../../assets/images/background/bahia_donostia_blue.jpg'); 
+        background-repeat: no-repeat; background-size: cover;">
+
+    <!-- Mask & flexbox options-->
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+      <!-- Content -->
+      <div class="container">
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-md-6 mb-4 white-text text-center text-md-left">
+
+            <img src="../../../assets/smartkalea_white.png">
+
+            
+
+            <hr class="hr-light">
+
+            <p>
+              <strong class="text-white">Es un proyecto innovador de Fomento de San Sebastían con un modelo de colaboración público-privada que integra a los diferentes agentes que conviven en un ámbito de la ciudad desde una perspectiva Smart.</strong>
+            </p>
+
+            <h1 class="display-4 font-weight-bold text-white">Entra en el proyecto</h1>
+
+            <p class="mb-4 d-none d-md-block text-white">
+              Se trata de un proyecto piloto de implementaciones smart para testear y validar dicho modelo para su expansión a otros ámbitos geográficos y convertir la ciudad de Donostia en un punto de referencia Smart.
+              
+            </p>
+
+            <div class="row text-center align-middle">
+              <div class="col-md-6 align-self-center">
+                <a target="_blank" href="https://play.google.com/store/apps/details?id=es.letteringenieros.smartkalea2&gl=ES" ><img src="../../../assets/google-play-badge.png" width="200"></a>
+              </div>
+
+              <div class="col-md-6 align-self-center">
+                <br>
+                <a target="_blank" href="https://apps.apple.com/us/app/smartkalea/id1543224409?itsct=apps_box&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-top-left-radius: 13px; border-top-right-radius: 13px; border-bottom-right-radius: 13px; border-bottom-left-radius: 13px; width: 250px; height: 83px;">
+                  <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/es-ES?size=250x83&amp;releaseDate=1608249600&h=e238f689f59bf838e4166e7d3aaabdf5" alt="Download on the App Store" 
+                  style="width: 170px;"></a>
+              </div>
+            </div>
+
+            <strong class="text-white">
+              ¡Disponibles las aplicaciones oficiales del proyecto para iOs y Android!
+            </strong>
+
+            <br><br><br>
+
+            <div class="row text-center">
+              <a target="_blank" href="https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwi_w9_X_MXuAhWIUMAKHS7bBuQQFjAAegQIARAD&url=http%3A%2F%2Fwww.fomentosansebastian.eus%2Fsmartkalea%2F&usg=AOvVaw0auK2e93dGmV9ZKf0mOf6E" class="btn btn-info">
+                Web del proyecto
+              </a>
+          </div>
+
+          </div>
+
+          <div class="col-md-6 col-xl-5 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="circle"></div>
+                            <header class="myHed text-center">
+                                <i class="far fa-user"></i><p>
+                                    Apúntate ya</p>
+                            </header>
+
+                            
+                            <form class="main-form text-center" [formGroup]="registerForm" (ngSubmit)="register()" id="registerForm">
+            
+                                    <div class="form-group my-0">
+                                        <label class="my-0">
+                                            <i class="fas fa-user"></i>
+                                            <input type="text" formControlName="nombre" class="myInput" placeholder="Nombre y apellidos">
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-group my-0">
+                                        <label>
+                                            <i class="fas fa-envelope"></i>
+                                            <input type="email" formControlName="email" class="myInput" placeholder="Tu email">
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group my-0">
+                                        <label class="my-0">
+                                            <i class="fas fa-phone"></i>
+                                            <input type="text" formControlName="telefono" class="myInput" placeholder="Tu teléfono">
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group my-0">
+                                        <label class="my-0">
+                                            <i class="fas fa-home"></i>
+                                            <input type="text" formControlName="nombre_negocio" class="myInput" placeholder="Nombre negocio">
+                                        </label>
+                                    </div>
+
+                                    <div class="form-group my-0">
+                                        <label class="my-0">
+                                            <i class="fas fa-home"></i>
+                                            <input type="text" formControlName="direccion_negocio" class="myInput" placeholder="Dirección negocio">
+                                        </label>
+                                    </div>
+                                    <br>
+                                    <span>Adjunta una factura eléctrica como foto o PFD</span>
+                                    <br>
+                                    <div class="form-group my-0">
+                                        <label class="my-0">
+                                            <input type="file" formControlName="adjunto" accept=".pdf,.jpg,.png" />
+                                            
+                                        </label>
+                                    </div>
+
+                                    <br>
+
+                                    <fieldset class="form-check">
+                                        <input type="checkbox" formControlName="tiene_iberdrola" class="form-check-input" id="checkbox1">
+                                        <label for="checkbox1" class="form-check-label dark-grey-text">Dispongo de usuario y clave en Iberdrola</label>
+                                      </fieldset>
+            
+                                    <div class="form-group">
+                                        <label>
+                                            <input type="submit" class="form-control button" value="ENVIAR">
+                                        </label>
+                                    </div>
+
+                            </form>
+
+              </div>
+
+            </div>
+            <!--/.Card-->
+
+          </div>
+          <!--Grid column-->
+
+        </div>
+        <!--Grid row-->
+
+      </div>
+      <!-- Content -->
+
+    </div>
+    <!-- Mask & flexbox options-->
+
+  </div>
+  <!-- Full Page Intro -->
+
+  <!--Main layout-->
+  <main>
+    <div class="container">
+
+      <!-- <hr class="my-5"> -->
+
+      <!--Section: Main features & Quick Start-->
+      <section class="mt-5 wow fadeIn">
+
+        <h3 class="h3 text-center mb-5">Más detalles</h3>
+
+        <!--Grid row-->
+        <div class="row wow fadeIn">
+
+          <!--Grid column-->
+          <div class="col-lg-6 col-md-12 px-4">
+
+            <!--First row-->
+            <div class="row">
+              <div class="col-1 mr-3">
+                <i class="fas fa-code fa-2x indigo-text"></i>
+              </div>
+              <div class="col-10">
+                <h5 class="feature-title">Historia</h5>
+                <p class="grey-text">SmartKalea comenzó a implementarse en 2014 en la calle Mayor. </p>
+              </div>
+            </div>
+            <!--/First row-->
+
+            <div style="height:30px"></div>
+
+            <!--Second row-->
+            <div class="row">
+              <div class="col-1 mr-3">
+                <i class="fas fa-book fa-2x blue-text"></i>
+              </div>
+              <div class="col-10">
+                <h5 class="feature-title">Seguimos sumando barrios</h5>
+                <p class="grey-text">Los buenos resultados del piloto han permitido seguir avanzando en la iniciativa, ampliando el proyecto tanto en diferentes ámbitos geográficos como a nivel nuevas de actuaciones e incorporación de nuevos agentes a la comunidad SmartKalea. A lo largo de 2020 el proyecto se replica en la calle Sancho el Sabio del barrio de Amara, manteniendo y ampliando a su vez las actuaciones en Parte Vieja y en el barrio de Altza.
+                </p>
+              </div>
+            </div>
+            <!--/Second row-->
+
+          </div>
+          <!--/Grid column-->
+
+          <!--Grid column-->
+          <div class="col-lg-6 col-md-12">
+
+            <p class="h5 text-center mb-4">SmartKalea: ¿Quieres conocer cuáles son las calles smart de Donostia/San Sebastián?</p>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/q7CgnXTIS-4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            
+          </div>
+          <!--/Grid column-->
+
+        </div>
+        <!--/Grid row-->
+
+      </section>
+      <!--Section: Main features & Quick Start-->
+
+      <hr class="my-5">
+
+      <!--Section: Not enough-->
+      <section>
+
+        <h2 class="my-5 h3 text-center">Promotores y Colaboradores</h2>
+
+        <!--First row-->
+        <div class="row features-small mb-7 mt-5 wow fadeIn">
+
+          <!--First column-->
+          <div class="col-md-4">
+            <!--First row-->
+            <div class="row">
+              <div class="col-2">
+                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+              </div>
+              <div class="col-10">
+                <h6 class="feature-title">Fomento de San Sebastián</h6>
+                <p class="grey-text">Our license is user-friendly. Feel free to use MDB for both private as well as commercial projects.
+                </p>
+                <div style="height:15px"></div>
+              </div>
+            </div>
+            <!--/First row-->
+
+            <!--Second row-->
+            <div class="row">
+              <div class="col-2">
+                <i class="fas fa-check-circle fa-2x indigo-text"></i>
+              </div>
+              <div class="col-10">
+                <h6 class="feature-title">Guipuzkoako Fou Aldundia</h6>
+                <p class="grey-text">An impressive collection of flexible components allows you to develop any project.
+                </p>
+                <div style="height:15px"></div>
+              </div>
+            </div>
+            <!--/Second row-->
+
+            <div class="row">
+                <div class="col-2">
+                  <i class="fas fa-check-circle fa-2x indigo-text"></i>
+                </div>
+                <div class="col-10">
+                  <h6 class="feature-title">Letter Ingenieros</h6>
+                  <p class="grey-text">An impressive collection of flexible components allows you to develop any project.
+                  </p>
+                  <div style="height:15px"></div>
+                </div>
+              </div>
+
+          </div>
+          <!--/First column-->
+
+          <!--Second column-->
+          <div class="col-md-5 flex-center">
+
+            <div class="row">
+                <div class="col-12">
+                    <img src="../../../assets/logo_fomentoss.png" class="z-depth-0 img-fluid">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <img src="../../../assets/logo2.png" class="z-depth-0 img-fluid">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <img src="../../../assets/images/logo-letter.png" width="220" class="z-depth-0 img-fluid">
+                </div>
+            </div>
+
+          </div>
+          <!--/Second column-->
+
+        </div>
+        <!--/First row-->
+
+      </section>
+      <!--Section: Not enough-->
+
+     
+
+    </div>
+  </main>
+  <!--Main layout-->
+
+  <!--Footer-->
+  <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+
+    <hr class="my-4">
+
+    <!-- Social icons -->
+    <div class="pb-4">
+      <a href="https://www.facebook.com/mdbootstrap" target="_blank">
+        <i class="fab fa-facebook-f mr-3"></i>
+      </a>
+
+      <a href="https://twitter.com/MDBootstrap" target="_blank">
+        <i class="fab fa-twitter mr-3"></i>
+      </a>
+
+      <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+        <i class="fab fa-youtube mr-3"></i>
+      </a>
+    </div>
+    <!-- Social icons -->
+
+    <!--Copyright-->
+    <div class="footer-copyright py-3">
+      © 2021 Copyright:
+      <a href="https://letteringenieros.es" target="_blank"> Letter Ingenieros SL </a>
+    </div>
+    <!--/.Copyright-->
+
+  </footer>
+  <!--/.Footer-->

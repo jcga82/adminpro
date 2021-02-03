@@ -104,18 +104,101 @@
                         <br><br>
                         <h4 class="font-medium m-t-30">Asesorías y Seguimientos</h4>
                         <hr>
-                        <div>
+                        <div *ngFor="let seguimiento of seguimientos">
+                            <!-- <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a> -->
+                            <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteSeguimiento(seguimiento)"> <i class="fa fa-close text-danger"></i> </a>
                             <button (click)="downloadInforme()">
-                                <i class="fa fa-download"></i> Informe Asesoría Noviembre 2020
-                            </button>
+                                <i class="fa fa-download"></i> Descargar
+                            </button> 
+                            Informe Seguimiento {{ seguimiento.fechaVisita }} - {{ seguimiento.empresa }}
+                            <br>
                         </div>
-                        <br>
+                        <!-- <br>
                         <div>
                             <button (click)="generarInformeSeguimiento()">
                                 <i class="fa fa-download"></i> Informe Seguimiento Abril 2020
                             </button>
+                        </div> -->
+                        <br>
+                        <button class="btn btn-success" data-toggle="modal" data-target="#addSeguimientoModal">Añadir Seguimiento</button>
+                        <div #seguimientosModal class="modal fade" id="addSeguimientoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel1">Añadir seguimiento</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form #seguimientosForm="ngForm" (ngSubmit)="addSeguimiento(seguimientosForm)">
+                                            <div class="form-group">
+                                                <label for="recipient-name" class="control-label">Fecha:</label>
+                                                <input type="text" name="date" [(ngModel)]="newSeguimiento.date" class="form-control" id="recipient-name1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="message-text" class="control-label">Empresa:</label>
+                                                <textarea class="form-control" name="empresa" [(ngModel)]="newSeguimiento.empresa" id="message-text1"></textarea>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                <button type="submit" [disabled]="!seguimientosForm.form.valid" class="btn btn-success">Guardar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <br>
+                        <div class="card-header"> 
+                            <h5>Comentarios de Asesorías y Seguimientos</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Comentario</th>
+                                        <th class="text-nowrap">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let comentario of comentarios">
+                                    <tr>
+                                        <td>{{ comentario.date }}</td>
+                                        <td>{{ comentario.comentario }}</td>
+                                        <td class="text-nowrap">
+                                            <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a>
+                                            <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteComentario(comentario)"> <i class="fa fa-close text-danger"></i> </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#addComentarioModal">Añadir Comentario</button>
+                            <div #comentariosModal class="modal fade" id="addComentarioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="exampleModalLabel1">Añadir comentario</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form #comentariosForm="ngForm" (ngSubmit)="addComentario(comentariosForm)">
+                                                <div class="form-group">
+                                                    <label for="recipient-name" class="control-label">Fecha:</label>
+                                                    <input type="text" name="date" [(ngModel)]="newComentario.date" class="form-control" id="recipient-name1">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="message-text" class="control-label">Comentario:</label>
+                                                    <textarea class="form-control" name="comentario" [(ngModel)]="newComentario.comentario" id="message-text1"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                                    <button type="submit" [disabled]="!comentariosForm.form.valid" class="btn btn-success">Guardar</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

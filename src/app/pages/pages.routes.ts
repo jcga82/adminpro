@@ -5,6 +5,7 @@ import { Graficas1Component } from './graficas1/graficas1.component';
 import { PagesComponent } from './pages.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { NotificacionComponent } from './notificacion/notificacion.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 
 
@@ -12,6 +13,7 @@ const pagesRoutes: Routes = [
     {
             path: '',
             component: PagesComponent,
+            canActivate: [AuthGuard],
             children: [
                 //Rutas del router-outler secundario
                 { path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'} },

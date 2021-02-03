@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora } from 'src/assets/querys/querysGraphql';
+import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora, MutateAddSeguimiento, MutateDeleteSeguimiento } from 'src/assets/querys/querysGraphql';
 
 import { Users } from 'src/assets/querys/querysGraphql';
 import { environment } from 'src/environments/environment';
@@ -41,9 +41,7 @@ export class UsuariosService {
 
       this.http.post('https://smartkaleaenergia.com/es/api-token-auth/', body)
         .subscribe((resp: any) => {
-          console.log(resp);
-    
-          // resp.token="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1ZTgxOTRiZTYzODI5ODA0ZjA0MWUxNGUiLCJuYW1lIjoiYWRtaW4iLCJtYWlsIjoiYWRtaW5AbGV0dGVyLmVzIiwibGV2ZWwiOiJBRE1JTiIsImV4cCI6MTYwOTQ5MzMyM30.AbWOn3pOik11ftYYoog00jr0vcAgsWbFfqQpYAm1gWQ";
+          // console.log(resp);
           this.guardarTokenKE(resp.token);
           resolve(true);
         }, (err: HttpErrorResponse) => {
@@ -104,39 +102,34 @@ export class UsuariosService {
   }
 
 
-  async validaToken(): Promise<boolean> {
-    console.log('Cargado token del storage...', this.token);
-    if (!this.token) {
-      // this.navCrtl.navigateRoot('/login');
+  async validaToken(): Promise<boolean> {;
+    
+    if (!localStorage.getItem('token')) {
+      console.log('no hay token almacenado')
+      this.router.navigateByUrl('/login');
       return Promise.resolve(false);
     }
 
+    console.log('Cargado token del storage...', this.token);
+
     return new Promise<boolean>( resolve => {
-      const headers = {
-        headers: {
-            'Authorization': 'JWT ' + this.token,
-            'Content-Type': 'application/json'
-        }
-      };
-
-      const user = 'MariaJesusForcada';
-      const contrato = 'ES0021000003411460EM';
-      const granularity = 'Days';
-      const fromDate = '1601503200';
-      const toDate = '1604185199.999';
-      this.http.get<RespuestaGetMyData>(URL + '/datastream/get_my_data.json?fromDate=' + fromDate + '&endDate=' + toDate + '&granularity='
-        + granularity + '&contrato_id=' + contrato + '&var_type=Consumo&as_user=' + user, headers)
-
-          .subscribe( (data: RespuestaGetMyData) => {
-          console.log('aquiii', data);
-          if (data) {
-            this.respuestaGetMyData = data;
+      console.log('entro al resolve')
+      this.cargarPerfiles()
+        .subscribe((result: any) => {
+          console.log(result);
+          if (result) {
             resolve(true);
           } else {
-            // this.navCrtl.navigateRoot('/login');
+            this.router.navigateByUrl('/login');
             resolve(false);
           }
-        });
+        },
+        error => {
+          console.log(error);
+          this.router.navigateByUrl('/login');
+          resolve(false);
+        },
+        );
 
       });
   }
@@ -336,6 +329,29 @@ export class UsuariosService {
             // tag: mejora.tag,
             titulo: mejora.titulo,
             descripcion: mejora.descripcion
+          } 
+        })
+    }
+
+    // Seguimientos y sus comentarios
+
+    public addSeguimiento(identifier: string, seguimiento: any) {
+      console.log(seguimiento);
+      return this.apollo.mutate(
+        { mutation: MutateAddSeguimiento,
+          variables: {
+            profile: identifier,
+            fechaVisita: this.datePipe.transform(seguimiento.date, 'yyyy-MM-dd'),
+            empresa: seguimiento.empresa
+          } 
+        })
+    }
+
+    public deleteSeguimiento(id: string) {
+      return this.apollo.mutate(
+        { mutation: MutateDeleteSeguimiento,
+          variables: {
+            oid: id
           } 
         })
     }

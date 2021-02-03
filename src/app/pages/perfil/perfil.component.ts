@@ -8,7 +8,7 @@ import { Comentario, MejoraPropuesta, ConsumoAnualKalea } from 'src/app/interfac
 import { ConsumosService } from 'src/app/services/consumos.service';
 import { PdfMakeService } from 'src/app/services/pdf-make.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { CalidadDato, Consumo, Contrato, Cups, Profile } from 'src/assets/querys/querysGraphql';
+import { CalidadDato, Consumo, Contrato, Cups, Profile, Seguimientos } from 'src/assets/querys/querysGraphql';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ComentarioComponent } from 'src/app/components/comentario/comentario.component';
 import { MejoraComponent } from 'src/app/components/mejora/mejora.component';
@@ -34,6 +34,11 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     comentario: ''
   };
   comentarios: Comentario[] = [];
+  newSeguimiento = {
+    date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
+    empresa: ''
+  };
+  seguimientos: any[] = [];
   newMejora = {
     date: this.datePipe.transform(new Date(), 'yyyy-MM-dd'),
     titulo: '',
@@ -95,6 +100,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
   @ViewChild(KaleaConsumosChartComponent, { static: false }) kaleConsumos: any;
   @ViewChild('comentariosModal') comentariosModal!: ElementRef;
   @ViewChild('mejorasModal') mejorasModal!: ElementRef;
+  @ViewChild('seguimientosModal') seguimientosModal!: ElementRef;
 
   constructor(
     private pdfService: PdfMakeService,
@@ -181,6 +187,18 @@ export class PerfilComponent implements OnInit, AfterViewInit {
               this.calidad2021[0].totalNulo = result.data.analisis[0].totalNulo;
               this.calidad2021[0].totalZero = result.data.analisis[0].totalZero;
           });
+
+          // Pido los valores de seguimientos
+          this.apollo.watchQuery(
+            { query: Seguimientos,
+              variables: {
+                oidProfile: this.usuario.identifier
+              }
+            })
+            .valueChanges.subscribe((result: any) => {
+              console.log('seguimientos::::', result.data.seguimiento);
+              this.seguimientos = result.data.seguimiento;
+            });
 
           // Pido los valores del contrato
           this.apollo.watchQuery(
@@ -430,6 +448,63 @@ export class PerfilComponent implements OnInit, AfterViewInit {
             confirmButtonText: 'OK'
           })
       });
+    });
+  }
+
+  addSeguimiento(seguimiento: any) {
+    jQuery(this.seguimientosModal.nativeElement).modal('hide');
+    this.usuarioService.addSeguimiento(this.usuario.identifier, seguimiento.form.value)
+      .subscribe( (seg: any) => {
+        console.log(seg);
+        //this.seguimientos = seg.data.createSeguimiento.seguimiento;
+        Swal.fire({
+          title: 'Seguimiento',
+          text: 'El seguimiento ha sido añadido correctamente.',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        })
+      },(error: any) => {
+        Swal.fire({
+          title: 'Error Seguimiento',
+          text: error,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        })
+      });
+  }
+
+  deleteSeguimiento(seguimiento: any) {
+    console.log(seguimiento.id);
+    Swal.fire({
+      title: '¿Está seguro de borrar el seguimiento?',
+      text: 'El seguimiento será borrado.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar'
+    })
+    .then( ok => {
+      if (ok.value) {
+
+        this.usuarioService.deleteSeguimiento(seguimiento.id)
+          .subscribe( (seg: any) => {
+            console.log(seg);
+            //this.comentarios = com.data.deleteComentario.comentarios;
+            Swal.fire({
+              title: 'Seguimiento',
+              text: 'El seguimiento ha sido borrado correctamente.',
+              icon: 'success',
+              confirmButtonText: 'OK'
+            })
+          },(error: any) => {
+            Swal.fire({
+              title: 'Error Seguimiento',
+              text: error,
+              icon: 'error',
+              confirmButtonText: 'OK'
+            })
+          });
+
+      }
     });
   }
 

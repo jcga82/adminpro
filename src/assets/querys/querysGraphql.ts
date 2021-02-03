@@ -365,3 +365,56 @@ query Consumo($idPerfilIn: [Int],$firstYear:Int,$secondYear:Int,$extraYear: Int)
   }
 }
 `;
+
+export const Seguimientos = gql`
+  query Seguimiento($oidProfile: String)  {
+    seguimiento(oidProfile: $oidProfile ) {
+      id,
+      profileId,
+      empresa,
+      fechaVisita,
+      realizado,
+      comentarios {
+        id,
+        comentario,
+        doneBy,
+        fecha
+      }
+    }
+  }
+`;
+
+export const MutateAddSeguimiento = gql`
+  mutation CreateSeguimiento($profile: String, $empresa: String) {
+    createSeguimiento(
+      profileId: $profile,
+      seguimiento: {
+      empresa: $empresa,
+      fechaVisita: "2021-01-01",
+      realizado: true
+    }) {
+      seguimiento {
+        id,
+        profileId,
+        empresa,
+        fechaVisita,
+        realizado,
+        comentarios {
+          comentario,
+          fecha,
+          doneBy
+        }
+      }
+    }
+  }
+`;
+
+export const MutateDeleteSeguimiento = gql`
+  mutation DeleteSeguimiento($id: String) {
+    deleteSeguimiento(
+      oid: $id,
+    ) {
+      isDeleted
+    }
+  }
+`;

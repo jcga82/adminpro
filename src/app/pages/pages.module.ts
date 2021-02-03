@@ -17,6 +17,7 @@ import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NotificacionComponent } from './notificacion/notificacion.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { NotificacionComponent } from './notificacion/notificacion.component';
         PagesComponent,
         PerfilComponent,
         LoginComponent,
-        NotificacionComponent
+        NotificacionComponent,
+        LandingComponent
     ],
     exports: [
         DashboardComponent,

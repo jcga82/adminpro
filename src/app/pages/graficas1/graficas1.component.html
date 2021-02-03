@@ -24,6 +24,11 @@
         <select name="miselect" (change)="onRangoChange()">
           <option [value]="item" *ngFor="let item of lista" [ngValue]="item" [selected]="item">{{item}}</option>
         </select>
+
+        <select name="miselect" (change)="onRangoChange()">
+          <option [value]="item" *ngFor="let item of listaBarrios" [ngValue]="item" [selected]="item">{{item}}</option>
+        </select>
+
         <h4>Promedio periodo seleccionado: {{ promedio }} % con {{ total }} suministros.</h4>
         <br>
         <div *ngFor="let c of calidad">
