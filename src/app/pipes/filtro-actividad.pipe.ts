@@ -15,13 +15,13 @@ export class FiltroActividadPipe implements PipeTransform {
     if (!esVivienda) {
       console.log('filtro quita viviendas');
       return array.filter(
-        item => !item[columna].includes('Vivienda')
+        item => !item[columna].toLowerCase().includes('vivienda')
       );
     }
     else if (!esComercio) {
       console.log('filtro quita comercios');
       return array.filter(
-        item => item[columna].includes('Vivienda')
+        item => item[columna].toLowerCase().includes('vivienda')
       );
     } else {
       return array;
