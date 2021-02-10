@@ -456,7 +456,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     this.usuarioService.addSeguimiento(this.usuario.identifier, seguimiento.form.value)
       .subscribe( (seg: any) => {
         console.log(seg);
-        //this.seguimientos = seg.data.createSeguimiento.seguimiento;
+        this.seguimientos = seg.data.createSeguimiento.seguimientos;
         Swal.fire({
           title: 'Seguimiento',
           text: 'El seguimiento ha sido añadido correctamente.',
@@ -483,12 +483,12 @@ export class PerfilComponent implements OnInit, AfterViewInit {
       confirmButtonText: 'Eliminar'
     })
     .then( ok => {
+      console.log(ok);
       if (ok.value) {
-
         this.usuarioService.deleteSeguimiento(seguimiento.id)
           .subscribe( (seg: any) => {
             console.log(seg);
-            //this.comentarios = com.data.deleteComentario.comentarios;
+            //this.comentarios = seg.data.deleteSeguimiento.comentarios;
             Swal.fire({
               title: 'Seguimiento',
               text: 'El seguimiento ha sido borrado correctamente.',

@@ -1,0 +1,44 @@
+
+
+<div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-subtitle">Listado de solicitudes pendientes en la base de datos.</h6>
+          <div class="table-responsive m-t-40">      
+
+          <table id="example23" 
+            *ngIf="data"
+            class="display nowrap table table-hover" 
+            data-search="true"
+            cellspacing="0" 
+            width="100%">                 
+              <thead>                          
+                <tr>
+                  <th>Estado</th>
+                  <th>Fecha</th>
+                  <th>Email</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let n of data | sortBy:false">
+                <tr>
+                  <td>
+                    {{ n.estado }}
+                  </td>
+                  <td>{{ n.createdAt }}</td>
+                  <td>
+                    <b>{{ n.email }}</b>
+                  </td>
+                  <td>
+                      {{ n.nombreCompleto }}
+                  </td>
+                </tr>      
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div> 
+  </div>
+  

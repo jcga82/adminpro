@@ -18,6 +18,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login/login.component';
 import { NotificacionComponent } from './notificacion/notificacion.component';
 import { LandingComponent } from './landing/landing.component';
+import { SolicitudComponent } from './solicitud/solicitud.component';
+import { SeguimientoComponent } from './seguimiento/seguimiento.component';
 
 @NgModule({
     declarations: [
@@ -28,7 +30,9 @@ import { LandingComponent } from './landing/landing.component';
         PerfilComponent,
         LoginComponent,
         NotificacionComponent,
-        LandingComponent
+        LandingComponent,
+        SolicitudComponent,
+        SeguimientoComponent
     ],
     exports: [
         DashboardComponent,

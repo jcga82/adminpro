@@ -19,15 +19,38 @@
       <div class="card-body">
 
         <h4 class="font-medium m-t-30">Calidad del dato - Últimos 30 días, desde {{ fechaInicioString }} hasta {{ fechaFinString }}</h4>
-          <!-- <h5 class="m-t-30"><b>Enero 2021 ({{ calidad.numDias }} d)</b> ({{ calidad.totalCorrecto + calidad.totalEstimado + calidad.totalFallo + calidad.totalNulo + calidad.totalZero }} días - {{ calidad.totalCorrecto }} son correctos) <span class="pull-right">{{ calidad.porcentajeCorrecto | number : '1.2-2' }} %</span></h5> -->
-          
-        <select name="miselect" (change)="onRangoChange()">
-          <option [value]="item" *ngFor="let item of lista" [ngValue]="item" [selected]="item">{{item}}</option>
-        </select>
 
-        <select name="miselect" (change)="onRangoChange()">
-          <option [value]="item" *ngFor="let item of listaBarrios" [ngValue]="item" [selected]="item">{{item}}</option>
-        </select>
+        <form [formGroup]="filtrosForm" (ngSubmit)="cargarCalidadDatoZonas()">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <select formControlName="tiempo">
+                  <option value="tiempo">Elige una tiempo</option>
+                  <option *ngFor="let tiempo of listaTiempos" [ngValue]="tiempo">{{tiempo}}
+                  </option>
+               </select>
+              </div>
+              <div class="col">
+                <select formControlName="zona">
+                  <option value="zona">Elige una zona</option>
+                  <option *ngFor="let zona of listaZonas" [ngValue]="zona">{{zona}}
+                  </option>
+               </select>
+              </div>
+              <div class="col">
+                <select formControlName="alcance">
+                  <option value="alcance">Elige un alcance</option>
+                  <option *ngFor="let alcance of listaAlcance" [ngValue]="alcance">{{alcance}}
+                  </option>
+               </select>
+              </div>
+              <div class="col">
+                <button type="submit" class="btn btn-info">Aplicar filtro</button>
+              </div>
+            </div>
+          </div>
+       </form>
 
         <h4>Promedio periodo seleccionado: {{ promedio }} % con {{ total }} suministros.</h4>
         <br>

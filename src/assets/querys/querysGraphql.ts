@@ -95,6 +95,39 @@ query PruebaEstimaciones($oidProfile: String, $initDate: Date, $endDate: Date) {
 }
 `;
 
+export const CalidadDatoZonas = gql`
+  query PruebaEstimacionesZona($zona: String!,$initDate: Date!,$endDate: Date!,$alcance: String) {
+    analisisZona(codigoZona: $zona,initDate: $initDate,endDate: $endDate,alcance: $alcance) {
+      codigoZona
+      alcance
+      totales {
+        totalElementos
+        totalElementosCorrectos
+        totalElementosEstimados
+      },
+      porcentajes {
+        porcentajeCorrectos
+        porcentajeEstimados
+      },
+      individuales {
+        nombrePerfil
+        oidProfile
+        numDias
+        totalEstimado
+        totalZero
+        totalCorrecto
+        totalFallo
+        totalNulo
+        porcentajeEstimado
+        porcentajeZero
+        porcentajeCorrecto
+        porcentajeFallo
+        porcentajeNulo
+      }
+    }
+  }
+`;
+
 export const CalidadDatoTotal = gql`
 query estimacion($initDate: Date,$endDate: Date) {
   analisisEst: analisisCompleto(initDate:$initDate,endDate: $endDate) {
@@ -385,32 +418,24 @@ export const Seguimientos = gql`
 `;
 
 export const MutateAddSeguimiento = gql`
-  mutation CreateSeguimiento($profile: String, $empresa: String) {
+  mutation CreateSeguimiento($profile: String!, $empresa: String!) {
     createSeguimiento(
       profileId: $profile,
       seguimiento: {
-      empresa: $empresa,
-      fechaVisita: "2021-01-01",
-      realizado: true
-    }) {
-      seguimiento {
-        id,
-        profileId,
-        empresa,
-        fechaVisita,
-        realizado,
-        comentarios {
-          comentario,
-          fecha,
-          doneBy
-        }
+        empresa: $empresa,
+        fechaVisita: "2021-01-01",
+        realizado: true
+      }
+    ) {
+        seguimientos {
+          id
       }
     }
   }
 `;
 
 export const MutateDeleteSeguimiento = gql`
-  mutation DeleteSeguimiento($id: String) {
+  mutation DeleteSeguimiento($id: String!) {
     deleteSeguimiento(
       oid: $id,
     ) {
@@ -418,3 +443,57 @@ export const MutateDeleteSeguimiento = gql`
     }
   }
 `;
+
+export const Solicitudes = gql`
+  query {
+    solicitud {
+      id,
+      nombreCompleto,
+      nombreNegocio,
+      direccionNegocio,
+      email,
+      createdAt,
+      estado
+    }
+  }
+`;
+
+export const MutateAddSolicitud = gql`
+  mutation CrearSolicitud(
+    $email: String!,
+    $nombreCompleto: String,
+  ) {
+    createSolicitud(
+      solicitud: {
+        email: $email,
+        nombreCompleto: $nombreCompleto,
+    }) {
+      solicitud {
+        id,
+        nombreCompleto,
+        email,
+        telefono,
+        nombreNegocio,
+        direccionNegocio,
+        dispongoUsuarioIberdrola,
+        estado,
+        observaciones,
+        createdAt,
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const MutateDeleteSolicitud = gql`
+  mutation BorrarSolicitud(
+    $id: String!,
+  ) {
+    deleteSolicitud(
+      id: $id
+    ) {
+      isDeleted
+    }
+  }
+`;
+

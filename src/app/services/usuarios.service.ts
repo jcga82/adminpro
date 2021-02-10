@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora, MutateAddSeguimiento, MutateDeleteSeguimiento } from 'src/assets/querys/querysGraphql';
+import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora, MutateAddSeguimiento, MutateDeleteSeguimiento, MutateAddSolicitud, MutateDeleteSolicitud, Solicitudes, Seguimientos } from 'src/assets/querys/querysGraphql';
 
 import { Users } from 'src/assets/querys/querysGraphql';
 import { environment } from 'src/environments/environment';
@@ -335,13 +335,18 @@ export class UsuariosService {
 
     // Seguimientos y sus comentarios
 
+    public cargarSeguimientos() {
+      return this.apollo.watchQuery({ query: Seguimientos })
+        .valueChanges
+    }
+
     public addSeguimiento(identifier: string, seguimiento: any) {
       console.log(seguimiento);
       return this.apollo.mutate(
         { mutation: MutateAddSeguimiento,
           variables: {
             profile: identifier,
-            fechaVisita: this.datePipe.transform(seguimiento.date, 'yyyy-MM-dd'),
+            //fechaVisita: this.datePipe.transform(seguimiento.date, 'yyyy-MM-dd'),
             empresa: seguimiento.empresa
           } 
         })
@@ -351,7 +356,34 @@ export class UsuariosService {
       return this.apollo.mutate(
         { mutation: MutateDeleteSeguimiento,
           variables: {
-            oid: id
+            id: id
+          } 
+        })
+    }
+
+    // Solicitudes
+
+    public cargarSolicitudes() {
+      return this.apollo.watchQuery({ query: Solicitudes })
+        .valueChanges
+    }
+
+    public addSolicitud(solicitud: any) {
+      console.log(solicitud);
+      return this.apollo.mutate(
+        { mutation: MutateAddSolicitud,
+          variables: {
+            email: solicitud.email,
+            nombreCompleto: solicitud.nombreCompleto
+          } 
+        })
+    }
+
+    public deleteSolicitud(id: string) {
+      return this.apollo.mutate(
+        { mutation: MutateDeleteSolicitud,
+          variables: {
+            id: id
           } 
         })
     }
