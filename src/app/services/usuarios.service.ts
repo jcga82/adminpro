@@ -346,7 +346,7 @@ export class UsuariosService {
         { mutation: MutateAddSeguimiento,
           variables: {
             profile: identifier,
-            //fechaVisita: this.datePipe.transform(seguimiento.date, 'yyyy-MM-dd'),
+            fechaVisita: this.datePipe.transform(seguimiento.date, 'yyyy-MM-dd'),
             empresa: seguimiento.empresa
           } 
         })

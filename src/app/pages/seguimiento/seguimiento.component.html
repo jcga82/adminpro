@@ -19,13 +19,14 @@
                   <th>Fecha Visita</th>
                   <th>Empresa</th>
                   <th>Comentarios</th>
+                  <th class="text-nowrap">Acciones</th>
                 </tr>
               </thead>
               <tbody *ngFor="let n of data | sortBy:false">
                 <tr>
                   <td>
                     <i class="far" [ngClass]="{'fa-check' : n.realizado, 'fa-bell-o': !n.realizado}">
-                        {{n.realizado ? 'Realizada' : 'Planificado'}}
+                        {{n.realizado ? 'Realizado' : 'Planificado'}}
                     </i>
                   </td>
                   <td>{{ n.fechaVisita }}</td>
@@ -33,8 +34,12 @@
                     <b>{{ n.empresa }}</b>
                   </td>
                   <td>
-                      Click aqui
+                      No hay
                   </td>
+                  <td class="text-nowrap">
+                    <!-- <a href="#" data-toggle="modal" data-original-title="Editar" (click)="updateSeguimiento(n)"><i class="fa fa-pencil text-inverse m-r-10"></i></a> -->
+                    <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteSeguimiento(n)"> <i class="fa fa-close text-danger"></i> </a>
+                </td>
                 </tr>      
               </tbody>
             </table>

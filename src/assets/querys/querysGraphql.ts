@@ -418,17 +418,19 @@ export const Seguimientos = gql`
 `;
 
 export const MutateAddSeguimiento = gql`
-  mutation CreateSeguimiento($profile: String!, $empresa: String!) {
+  mutation CreateSeguimiento($profile: String!, $empresa: String!, $fechaVisita: Date!,) {
     createSeguimiento(
       profileId: $profile,
       seguimiento: {
         empresa: $empresa,
-        fechaVisita: "2021-01-01",
+        fechaVisita: $fechaVisita,
         realizado: true
       }
     ) {
         seguimientos {
-          id
+          id,
+          empresa,
+          fechaVisita,
       }
     }
   }

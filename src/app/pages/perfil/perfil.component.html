@@ -3,7 +3,8 @@
     <div class="col-lg-4 col-xlg-3 col-md-5">
         <div class="card" *ngIf="usuario">
             <div class="card-body">
-                <div class="m-t-30"> <img src="../assets/images/users/cabo_rojo.jpg" width="250" />
+                <div class="m-t-30"> 
+                    <!-- <img src="../assets/images/users/cabo_rojo.jpg" width="250" /> -->
                     <h4 class="card-title m-t-10">{{ usuario.usuario }}</h4>
                     <i class="icon-people"></i>  <b>  {{ usuario.codigo }}</b>
                     <h6 class="card-subtitle">{{ usuario.actividad }}</h6>
@@ -105,12 +106,12 @@
                         <h4 class="font-medium m-t-30">Asesorías y Seguimientos</h4>
                         <hr>
                         <div *ngFor="let seguimiento of seguimientos">
-                            <!-- <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a> -->
-                            <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteSeguimiento(seguimiento)"> <i class="fa fa-close text-danger"></i> </a>
-                            <button (click)="downloadInforme()">
+                            <button (click)="generarInformeSeguimiento()">
                                 <i class="fa fa-download"></i> Descargar
                             </button> 
-                            Informe Seguimiento {{ seguimiento.fechaVisita }} - {{ seguimiento.empresa }}
+                            Informe Seguimiento {{ seguimiento.fechaVisita }} por {{ seguimiento.empresa }}
+                            <!-- <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a> -->
+                            <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteSeguimiento(seguimiento)"> <i class="fa fa-close text-danger"></i> </a>
                             <br>
                         </div>
                         <!-- <br>
@@ -199,6 +200,10 @@
                                 </div>
                             </div>
                         </div> -->
+                        <div class="card-body">
+                            <h5 class="font-medium m-t-30">Consumos Anuales</h5>
+                            <app-kalea-consumos-chart *ngIf="consumo2019!=0" [consumo19]="consumo2019" [consumo20]="consumo2020"></app-kalea-consumos-chart>
+                        </div>
                     </div>
                 </div>
 
@@ -218,10 +223,6 @@
                         <hr>
                         <app-grafico-potencia titulo="Potencia Máxima" label="Mes" [data]="dataPotencia"></app-grafico-potencia>
                         <br>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="font-medium m-t-30">Consumos Anuales</h5>
-                        <app-kalea-consumos-chart *ngIf="consumo2019!=0" [consumo19]="consumo2019" [consumo20]="consumo2020"></app-kalea-consumos-chart>
                     </div>
                 </div>
 

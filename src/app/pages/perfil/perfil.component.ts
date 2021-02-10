@@ -488,6 +488,7 @@ export class PerfilComponent implements OnInit, AfterViewInit {
         this.usuarioService.deleteSeguimiento(seguimiento.id)
           .subscribe( (seg: any) => {
             console.log(seg);
+            window.location.reload();
             //this.comentarios = seg.data.deleteSeguimiento.comentarios;
             Swal.fire({
               title: 'Seguimiento',
@@ -508,13 +509,9 @@ export class PerfilComponent implements OnInit, AfterViewInit {
     });
   }
 
-  downloadInforme() {
-    
-  }
-
   generarInformeSeguimiento() {
     console.log(this.tarifa);
-    this.pdfService.generatePdf(this.usuario, this.kaleConsumos.getImageBase64(), this.consumo2019, this.consumo2020, this.potencia, this.tarifa);
+    this.pdfService.generatePdf(this.usuario, this.kaleConsumos ? this.kaleConsumos.getImageBase64() : null, this.consumo2019, this.consumo2020, this.potencia, this.tarifa);
   }
 
 }

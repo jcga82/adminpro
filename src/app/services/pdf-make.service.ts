@@ -92,7 +92,7 @@ export class PdfMakeService {
               absolutePosition: { x: 310, y: 410 }
             },
             {
-              image: _image,
+              image: _image ? _image : logo,
               fit: [225, 225],
               absolutePosition: { x: 35, y: 295 }
             },
