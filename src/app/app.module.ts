@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {NgbPaginationModule, NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { AuthGuard } from './guards/auth.guard';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AuthGuard } from './guards/auth.guard';
     HttpClientModule,
     NgbModule,
     NgbPaginationModule,
-    NgbAlertModule
+    NgbAlertModule,
+    ComponentsModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

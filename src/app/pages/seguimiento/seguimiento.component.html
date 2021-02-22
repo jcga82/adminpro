@@ -17,6 +17,7 @@
                 <tr>
                   <th>Estado</th>
                   <th>Fecha Visita</th>
+                  <th>Comercio</th>
                   <th>Empresa</th>
                   <th>Comentarios</th>
                   <th class="text-nowrap">Acciones</th>
@@ -25,13 +26,14 @@
               <tbody *ngFor="let n of data | sortBy:false">
                 <tr>
                   <td>
-                    <i class="far" [ngClass]="{'fa-check' : n.realizado, 'fa-bell-o': !n.realizado}">
+                    <i class="far" [ngClass]="{'fa-check' : n.realizado, 'fa-bell-o': !n.seguimiento.realizado}">
                         {{n.realizado ? 'Realizado' : 'Planificado'}}
                     </i>
                   </td>
-                  <td>{{ n.fechaVisita }}</td>
+                  <td>{{ n.seguimiento.fechaVisita }}</td>
+                  <td>{{ n.profile.usuario }}</td>
                   <td>
-                    <b>{{ n.empresa }}</b>
+                    <b>{{ n.seguimiento.empresa }}</b>
                   </td>
                   <td>
                       No hay

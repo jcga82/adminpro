@@ -402,16 +402,43 @@ query Consumo($idPerfilIn: [Int],$firstYear:Int,$secondYear:Int,$extraYear: Int)
 export const Seguimientos = gql`
   query Seguimiento($oidProfile: String)  {
     seguimiento(oidProfile: $oidProfile ) {
-      id,
-      profileId,
-      empresa,
-      fechaVisita,
-      realizado,
-      comentarios {
+      seguimiento {
         id,
-        comentario,
-        doneBy,
-        fecha
+        realizado,
+        fechaVisita,
+        empresa,
+        comentarios {
+          id,
+          comentario,
+          doneBy,
+          fecha
+        }     
+      }
+    }
+  }
+`;
+
+export const SeguimientosTotal = gql`
+  query {
+    seguimiento(realizado: true) {
+      seguimiento {
+        id,
+        realizado,
+        fechaVisita,
+        empresa,
+        comentarios {
+          id,
+          comentario,
+          doneBy,
+          fecha
+        }     
+      }
+      profile {
+        identifier
+        usuario
+        idPerfil
+        nombrePerfil
+        abierto
       }
     }
   }

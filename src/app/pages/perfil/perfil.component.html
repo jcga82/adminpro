@@ -109,7 +109,7 @@
                             <button (click)="generarInformeSeguimiento()">
                                 <i class="fa fa-download"></i> Descargar
                             </button> 
-                            Informe Seguimiento {{ seguimiento.fechaVisita }} por {{ seguimiento.empresa }}
+                            Informe Seguimiento {{ seguimiento.seguimiento.fechaVisita }} por {{ seguimiento.seguimiento.empresa }}
                             <!-- <a href="#" data-toggle="modal" data-original-title="Editar" (click)="openComentarioModal(comentario)"><i class="fa fa-pencil text-inverse m-r-10"></i></a> -->
                             <a href="#" data-toggle="button" data-original-title="Eliminar" (click)="deleteSeguimiento(seguimiento)"> <i class="fa fa-close text-danger"></i> </a>
                             <br>

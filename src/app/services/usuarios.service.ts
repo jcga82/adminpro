@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
-import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora, MutateAddSeguimiento, MutateDeleteSeguimiento, MutateAddSolicitud, MutateDeleteSolicitud, Solicitudes, Seguimientos } from 'src/assets/querys/querysGraphql';
+import { MutateCambiarBooleanos, MutatePerfil, MutateLocalizacion, MutateAddComentario, MutateEditComentario, MutateDeleteComentario, MutateAddMejora, MutateEditMejora, MutateDeleteMejora, MutateAddSeguimiento, MutateDeleteSeguimiento, MutateAddSolicitud, MutateDeleteSolicitud, Solicitudes, Seguimientos, SeguimientosTotal } from 'src/assets/querys/querysGraphql';
 
 import { Users } from 'src/assets/querys/querysGraphql';
 import { environment } from 'src/environments/environment';
@@ -337,6 +337,11 @@ export class UsuariosService {
 
     public cargarSeguimientos() {
       return this.apollo.watchQuery({ query: Seguimientos })
+        .valueChanges
+    }
+
+    public cargarSeguimientosTotal() {
+      return this.apollo.watchQuery({ query: SeguimientosTotal })
         .valueChanges
     }
 

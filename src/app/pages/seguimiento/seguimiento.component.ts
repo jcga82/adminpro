@@ -16,7 +16,7 @@ export class SeguimientoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.usuariosServices.cargarSeguimientos()
+    this.usuariosServices.cargarSeguimientosTotal()
       .subscribe((result: any) => {
         console.log(result);
         this.data = result.data.seguimiento;
